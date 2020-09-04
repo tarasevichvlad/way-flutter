@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../navigation_bar.dart';
 
 class CreateTripPage extends StatelessWidget {
   @override
@@ -7,6 +8,7 @@ class CreateTripPage extends StatelessWidget {
       body: Row(
         children: [Text('Search page')],
       ),
+      bottomNavigationBar: NavigationBar(),
     );
   }
 }

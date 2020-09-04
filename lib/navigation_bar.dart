@@ -5,6 +5,8 @@ import './routes.dart';
 class NavigationBar extends StatelessWidget {
   @override
   BottomNavigationBar build(BuildContext context) {
+    RouteSettings settings = ModalRoute.of(context).settings;
+    int _currentIndex = routePath.indexOf(settings.name);
     return BottomNavigationBar(
       type: BottomNavigationBarType.fixed,
       showSelectedLabels: false,
@@ -12,6 +14,7 @@ class NavigationBar extends StatelessWidget {
       onTap: (value) {
         Navigator.pushNamed(context, routePath[value]);
       },
+      currentIndex: _currentIndex != -1 ? _currentIndex : 0,
       items: [
         BottomNavigationBarItem(
             icon: Icon(

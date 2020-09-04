@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../navigation_bar.dart';
 
 class MyAccountPage extends StatelessWidget {
   @override
@@ -7,6 +8,7 @@ class MyAccountPage extends StatelessWidget {
       body: Row(
         children: [Text('my account page')],
       ),
+      bottomNavigationBar: NavigationBar(),
     );
   }
 }
