@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import '../navigation_bar.dart';
 import '../routes.dart';
 
-class HomePage extends StatefulWidget {
+class HomeScreen extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<HomeScreen> {
   int _currentIndexPage = 0;
   int _currentIndexTab = 0;
   PageController _pageController;
@@ -21,6 +21,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: IndexedStack(
           index: _currentIndexPage,

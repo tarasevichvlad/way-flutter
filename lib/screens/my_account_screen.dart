@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-class CreateTripPage extends StatelessWidget {
+class MyAccountScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-      children: [Text('Search page')],
+      children: [Text('my account page')],
     );
   }
 }

@@ -65,6 +65,9 @@ flutter:
     - family: NavigationIcons
       fonts:
       - asset: fonts/NavigationIcons.ttf
+    - family: ComicSansMS
+      fonts:
+      - asset: fonts/ComicSansMS.ttf
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro

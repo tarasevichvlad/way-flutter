@@ -1,9 +1,9 @@
-import 'pages/booking_page.dart';
-import 'pages/search_page.dart';
-import 'pages/create_trip_page.dart';
-import 'pages/my_message_page.dart';
-import 'pages/my_account_page.dart';
-import 'pages/main_screen.dart';
+import 'screens/booking_screen.dart';
+import 'screens/search_screen.dart';
+import 'screens/create_trip_screen.dart';
+import 'screens/my_message_screen.dart';
+import 'screens/my_account_screen.dart';
+import 'screens/main_screen.dart';
 import 'package:flutter/material.dart';
 
 class TabNavigatorRoutes {
@@ -17,11 +17,11 @@ class TabNavigatorRoutes {
 
 Map<String, Widget> _routes = {
   TabNavigatorRoutes.root: MainScreen(),
-  TabNavigatorRoutes.booking: BookingPage(),
-  TabNavigatorRoutes.search: SearchPage(),
-  TabNavigatorRoutes.createTrip: CreateTripPage(),
-  TabNavigatorRoutes.myMessage: MyMessagePage(),
-  TabNavigatorRoutes.myAccount: MyAccountPage()
+  TabNavigatorRoutes.booking: BookingScreen(),
+  TabNavigatorRoutes.search: SearchScreen(),
+  TabNavigatorRoutes.createTrip: CreateTripScreen(),
+  TabNavigatorRoutes.myMessage: MyMessageScreen(),
+  TabNavigatorRoutes.myAccount: MyAccountScreen()
 };
 
 List<Widget> routes = _routes.values.toList();
