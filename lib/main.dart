@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'pages/home_page.dart';
-import './routes.dart';
 
 void main() {
   runApp(App());
@@ -9,6 +8,6 @@ void main() {
 class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(home: HomePage(), routes: routes);
+    return MaterialApp(home: HomePage());
   }
 }

@@ -1,41 +1,52 @@
 import 'package:flutter/material.dart';
 import 'navigation_icons.dart';
-import './routes.dart';
+import 'routes.dart';
+
+Map<String, BarItem> tabInfo = {
+  TabNavigatorRoutes.booking:
+      BarItem(text: 'Ваши бронирования', iconData: NavigationIcons.map_signs),
+  TabNavigatorRoutes.search:
+      BarItem(text: 'Поиск', iconData: NavigationIcons.search),
+  TabNavigatorRoutes.createTrip: BarItem(
+      text: 'Создание поездки', iconData: NavigationIcons.add_circle_outline),
+  TabNavigatorRoutes.myMessage:
+      BarItem(text: 'Ваши сообщения', iconData: NavigationIcons.message),
+  TabNavigatorRoutes.myAccount:
+      BarItem(text: 'Мой аккаунт', iconData: NavigationIcons.user),
+};
+
+class BarItem {
+  final String text;
+  final IconData iconData;
+  BarItem({this.text, this.iconData});
+}
 
 class NavigationBar extends StatelessWidget {
+  NavigationBar({this.currentIndex, this.onSelectTab});
+  final int currentIndex;
+  final ValueChanged<int> onSelectTab;
   @override
   BottomNavigationBar build(BuildContext context) {
-    RouteSettings settings = ModalRoute.of(context).settings;
-    int _currentIndex = routePath.indexOf(settings.name);
     return BottomNavigationBar(
       type: BottomNavigationBarType.fixed,
       showSelectedLabels: false,
       showUnselectedLabels: false,
+      currentIndex: currentIndex,
+      selectedItemColor: Colors.white,
+      unselectedItemColor: Colors.grey,
       onTap: (value) {
-        Navigator.pushNamed(context, routePath[value]);
+        onSelectTab(value);
       },
-      currentIndex: _currentIndex != -1 ? _currentIndex : 0,
-      items: [
-        BottomNavigationBarItem(
-            icon: Icon(
-              NavigationIcons.map_signs,
-              color: Colors.white,
-            ),
-            title: Text('Ваши бронирования')),
-        BottomNavigationBarItem(
-            icon: Icon(NavigationIcons.search, color: Colors.white),
-            title: Text('Поиск')),
-        BottomNavigationBarItem(
-            icon: Icon(NavigationIcons.add_circle_outline, color: Colors.white),
-            title: Text('Создание поездки')),
-        BottomNavigationBarItem(
-            icon: Icon(NavigationIcons.message, color: Colors.white),
-            title: Text('Ваши сообщения')),
-        BottomNavigationBarItem(
-            icon: Icon(NavigationIcons.user, color: Colors.white),
-            title: Text('Мой аккаунт'))
-      ],
+      items: tabInfo.values
+          .toList()
+          .map((item) => _buildItem(barItem: item))
+          .toList(),
       backgroundColor: Color.fromRGBO(18, 97, 106, 1),
     );
+  }
+
+  BottomNavigationBarItem _buildItem({BarItem barItem}) {
+    return BottomNavigationBarItem(
+        icon: Icon(barItem.iconData), title: Text(barItem.text));
   }
 }

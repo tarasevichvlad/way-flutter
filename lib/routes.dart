@@ -3,20 +3,25 @@ import 'pages/search_page.dart';
 import 'pages/create_trip_page.dart';
 import 'pages/my_message_page.dart';
 import 'pages/my_account_page.dart';
+import 'pages/main_screen.dart';
 import 'package:flutter/material.dart';
 
-Map<String, Widget Function(BuildContext)> routes = {
-  '/booking': (context) => BookingPage(),
-  '/search': (context) => SearchPage(),
-  '/create-trip': (context) => CreateTripPage(),
-  '/my-message': (context) => MyMessagePage(),
-  '/my-account': (context) => MyAccountPage()
+class TabNavigatorRoutes {
+  static const String root = '/';
+  static const String booking = '/booking';
+  static const String search = '/search';
+  static const String createTrip = '/create-trip';
+  static const String myMessage = '/my-message';
+  static const String myAccount = '/my-account';
+}
+
+Map<String, Widget> _routes = {
+  TabNavigatorRoutes.root: MainScreen(),
+  TabNavigatorRoutes.booking: BookingPage(),
+  TabNavigatorRoutes.search: SearchPage(),
+  TabNavigatorRoutes.createTrip: CreateTripPage(),
+  TabNavigatorRoutes.myMessage: MyMessagePage(),
+  TabNavigatorRoutes.myAccount: MyAccountPage()
 };
 
-List<String> routePath = [
-  '/booking',
-  '/search',
-  '/create-trip',
-  '/my-message',
-  '/my-account'
-];
+List<Widget> routes = _routes.values.toList();
