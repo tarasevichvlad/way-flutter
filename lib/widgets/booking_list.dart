@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:way/bloc/trip_bloc.dart';
+import 'package:way/blocs/blocs.dart';
 import 'package:way/services/trip_repository.dart';
 import 'booking_card.dart';
 

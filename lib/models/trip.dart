@@ -1,6 +1,8 @@
+import 'package:equatable/equatable.dart';
+
 import 'passenger.dart';
 
-class Trip {
+class Trip extends Equatable {
   String id;
   Null driver;
   int price;
@@ -26,7 +28,7 @@ class Trip {
 
   Trip.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    driver = json['driver'];
+
     price = json['price'];
     comment = json['comment'];
     from = json['from'];
@@ -42,20 +44,9 @@ class Trip {
     }
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['driver'] = this.driver;
-    data['price'] = this.price;
-    data['comment'] = this.comment;
-    data['from'] = this.from;
-    data['to'] = this.to;
-    data['seats'] = this.seats;
-    data['startingTime'] = this.startingTime;
-    data['finishTime'] = this.finishTime;
-    if (this.passengers != null) {
-      data['passengers'] = this.passengers.map((v) => v.toJson()).toList();
-    }
-    return data;
-  }
+  @override
+  List<Object> get props => [id, driver, price, comment, from, to, seats, startingTime,finishTime, passengers];
+
+  @override
+  String toString() => 'Trip { id: $id }';
 }

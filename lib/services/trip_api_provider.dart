@@ -5,7 +5,8 @@ import 'dart:convert';
 
 class TripProvider {
   Future<List<Trip>> getTrips() async {
-    final response = await http.get(Constants.getBaseUrl(),
+
+    final response = await http.get(Constants.getBaseUrl() + '/trips/me',
         headers: {'Authorization': Constants.TOKEN_ID});
 
     if (response.statusCode == 200) {

@@ -40,7 +40,7 @@ class MainScreen extends StatelessWidget {
                   child: Image.asset(
                     'assets/images/home_bg.jpg',
                     width: 341,
-                    height: 440,
+                    height: 400,
                   ),
                 )
               ],

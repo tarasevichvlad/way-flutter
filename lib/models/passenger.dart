@@ -1,4 +1,6 @@
-class Passenger {
+import 'package:equatable/equatable.dart';
+
+class Passenger extends Equatable {
   String id;
   String tripId;
   String passengerId;
@@ -21,4 +23,7 @@ class Passenger {
     data['passenger'] = this.passenger;
     return data;
   }
+
+  @override
+  List<Object> get props => [id, tripId, passengerId, passenger];
 }
