@@ -1,10 +1,11 @@
 import 'package:equatable/equatable.dart';
+import 'package:way/models/user.dart';
 
 class Passenger extends Equatable {
   String id;
   String tripId;
   String passengerId;
-  Null passenger;
+  User passenger;
 
   Passenger({this.id, this.tripId, this.passengerId, this.passenger});
 
@@ -12,7 +13,7 @@ class Passenger extends Equatable {
     id = json['id'];
     tripId = json['tripId'];
     passengerId = json['passengerId'];
-    passenger = json['passenger'];
+    passenger = User.fromJson(json['passenger']);
   }
 
   Map<String, dynamic> toJson() {
