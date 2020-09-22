@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:way/blocs/blocs.dart';
 import 'package:way/models/trip.dart';
+import 'package:way/search_icons.dart';
 
 class SearchScreen extends StatefulWidget {
   @override
@@ -22,40 +23,172 @@ class _SearchScreenState extends State<SearchScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<TripBloc, TripState>(
-      builder: (context, state) {
-        if (state is TripInitial) {
-          return Center(
-            child: CircularProgressIndicator(),
-          );
-        }
-
-        if (state is TripFailure) {
-          return Center(
-            child: Text('failed to fetch trips'),
-          );
-        }
-
-        if (state is TripSuccess) {
-          if (state.trips.isEmpty) {
-            return Center(
-              child: Text('no trips'),
-            );
-          }
-
-          return ListView.builder(
-            itemBuilder: (BuildContext context, int index) {
-              return index < state.trips.length ? TripWidget(trip: state.trips[index]) : Text("");
-            },
-            itemCount:state.trips.length,
-            controller: _scrollController,
-          );
-        }
-
-        return Center(
-          child: Text('error'),
-        );
-      },
+    return Container(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Padding(
+            padding: EdgeInsets.only(bottom: 16),
+            child: Image.asset('assets/images/find.png'),
+          ),
+          Container(
+            decoration: BoxDecoration(
+                color: Color.fromRGBO(245, 245, 245, 1),
+                borderRadius: BorderRadius.all(Radius.circular(18))),
+            padding: EdgeInsets.all(30),
+            margin: EdgeInsets.all(24),
+            child: Column(
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(bottom: 16),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Icon(
+                        SearchIcons.location,
+                        color: Color.fromRGBO(18, 97, 107, 1),
+                      ),
+                      Container(
+                        child: Text(
+                          'Откуда?',
+                          style: TextStyle(
+                              color: Color.fromRGBO(18, 97, 107, 1),
+                              fontFamily: 'ComicSansMS',
+                              fontSize: 18),
+                        ),
+                        padding: EdgeInsets.only(left: 16),
+                      )
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(bottom: 16),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Icon(
+                        SearchIcons.location,
+                        color: Color.fromRGBO(18, 97, 107, 1),
+                      ),
+                      Container(
+                        child: Text(
+                          'Куда?',
+                          style: TextStyle(
+                              color: Color.fromRGBO(18, 97, 107, 1),
+                              fontFamily: 'ComicSansMS',
+                              fontSize: 18),
+                        ),
+                        padding: EdgeInsets.only(left: 16),
+                      )
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(bottom: 16),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Icon(
+                        SearchIcons.calendar_outlilne,
+                        color: Color.fromRGBO(18, 97, 107, 1),
+                      ),
+                      Container(
+                        child: Text(
+                          'Когда?',
+                          style: TextStyle(
+                              color: Color.fromRGBO(18, 97, 107, 1),
+                              fontFamily: 'ComicSansMS',
+                              fontSize: 18),
+                        ),
+                        padding: EdgeInsets.only(left: 16),
+                      )
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(bottom: 16),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Icon(
+                        SearchIcons.clock,
+                        color: Color.fromRGBO(18, 97, 107, 1),
+                      ),
+                      Container(
+                        child: Text(
+                          'Во сколько?',
+                          style: TextStyle(
+                              color: Color.fromRGBO(18, 97, 107, 1),
+                              fontFamily: 'ComicSansMS',
+                              fontSize: 18),
+                        ),
+                        padding: EdgeInsets.only(left: 16),
+                      )
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(bottom: 16),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Icon(
+                        SearchIcons.airline_seat_recline_normal,
+                        color: Color.fromRGBO(18, 97, 107, 1),
+                      ),
+                      Container(
+                        child: Text(
+                          'Сколько нужно мест?',
+                          style: TextStyle(
+                              color: Color.fromRGBO(18, 97, 107, 1),
+                              fontFamily: 'ComicSansMS',
+                              fontSize: 18),
+                        ),
+                        padding: EdgeInsets.only(left: 16),
+                      )
+                    ],
+                  ),
+                ),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Icon(
+                      SearchIcons.users,
+                      color: Color.fromRGBO(18, 97, 107, 1),
+                    ),
+                    Container(
+                      child: Text(
+                        'Сзади только двое?',
+                        style: TextStyle(
+                            color: Color.fromRGBO(18, 97, 107, 1),
+                            fontFamily: 'ComicSansMS',
+                            fontSize: 18),
+                      ),
+                      padding: EdgeInsets.only(left: 16),
+                    )
+                  ],
+                )
+              ],
+            ),
+          ),
+          FlatButton(
+            onPressed: () {},
+            color: Color.fromRGBO(245, 245, 243, 1),
+            child: Container(
+              width: 330,
+              padding: EdgeInsets.all(10),
+              child: Center(
+                child: Text('Найти',
+                    style: TextStyle(
+                        color: Color.fromRGBO(18, 97, 107, 1),
+                        fontFamily: 'ComicSansMS',
+                        fontSize: 18)),
+              ),
+            ),
+          )
+        ],
+      ),
     );
   }
 

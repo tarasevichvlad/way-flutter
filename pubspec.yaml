@@ -53,6 +53,7 @@ flutter:
   assets:
     - assets/images/home_bg.svg
     - assets/images/home_bg.jpg
+    - assets/images/find.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
@@ -72,6 +73,9 @@ flutter:
     - family: ComicSansMS
       fonts:
       - asset: fonts/ComicSansMS.ttf
+    - family: SearchIcons
+      fonts:
+      - asset: fonts/SearchIcons.ttf
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro
