@@ -6,11 +6,11 @@ import 'package:way/models/trip.dart';
 class TripCard extends StatelessWidget {
   final Trip trip;
   static const TextStyle textStyleWhite =
-      TextStyle(fontFamily: 'Comic Sans MS', fontSize: 16, color: Colors.white);
+      TextStyle(fontFamily: 'Comic Sans MS', fontSize: 18, color: Colors.white);
 
   static const TextStyle textStyleBaseTheme = TextStyle(
       fontFamily: 'Comic Sans MS',
-      fontSize: 16,
+      fontSize: 18,
       color: const Color(0xff12616a));
 
   TripCard({@required this.trip});
@@ -29,16 +29,14 @@ class TripCard extends StatelessWidget {
                     borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(15.0),
                         topRight: Radius.circular(15.0))),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                child: Stack(
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(left: 25),
+                      padding: const EdgeInsets.only(left: 25, top: 3),
                       child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Text(
-                            '${trip.startingTime}',
+                            '${trip.getStartDate()}',
                             style: textStyleWhite,
                           ),
                           Padding(
@@ -53,12 +51,11 @@ class TripCard extends StatelessWidget {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(left: 25),
+                      padding: const EdgeInsets.only(left: 25, top: 27),
                       child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Text(
-                            '${trip.finishTime}',
+                            '${trip.getFinishDate()}',
                             style: textStyleWhite,
                           ),
                           Padding(
@@ -98,7 +95,7 @@ class TripCard extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            '${trip.driver.firstName} ${trip.driver.lastName}',
+                            '${trip.driver.getFullName()}',
                             style: textStyleBaseTheme,
                           ),
                           Row(
@@ -108,33 +105,42 @@ class TripCard extends StatelessWidget {
                                 color: const Color(0xff12616a),
                                 size: 20.0,
                               ),
-                              Text(
-                                "${trip.rating}",
-                                style: textStyleBaseTheme,
+                              Padding(
+                                padding: const EdgeInsets.only(left: 3),
+                                child: Text(
+                                  "${trip.driver.rating}",
+                                  style: textStyleBaseTheme,
+                                ),
                               ),
                               Padding(
                                 padding: const EdgeInsets.only(left: 25),
                                 child: Icon(
-                                  Icons.local_offer,
+                                  Icons.work,
                                   color: const Color(0xff12616a),
                                   size: 20.0,
                                 ),
                               ),
-                              Text(
-                                "${trip.price}р",
-                                style: textStyleBaseTheme,
-                              ),
+                             Padding(
+                               padding: const EdgeInsets.only(left: 3),
+                               child:  Text(
+                                 "${trip.price}р",
+                                 style: textStyleBaseTheme,
+                               ),
+                             ),
                               Padding(
                                 padding: const EdgeInsets.only(left: 25),
                                 child: Icon(
-                                  Icons.airline_seat_recline_normal,
+                                  Icons.event_seat,
                                   color: const Color(0xff12616a),
                                   size: 20.0,
                                 ),
                               ),
-                              Text(
-                                "${trip.seats - trip.passengers.length}",
-                                style: textStyleBaseTheme,
+                              Padding(
+                                padding: const EdgeInsets.only(left: 3),
+                                child: Text(
+                                  "${trip.seats - trip.passengers.length}",
+                                  style: textStyleBaseTheme,
+                                ),
                               )
                             ],
                           )
@@ -143,9 +149,9 @@ class TripCard extends StatelessWidget {
                     ),
                     trip.onlyTwoBehind
                         ? Padding(
-                            padding: const EdgeInsets.only(left: 20, right: 0),
+                            padding: const EdgeInsets.only(left: 10, right: 0),
                             child: Icon(
-                              Icons.group,
+                              Icons.people_outline,
                               color: const Color(0xff12616a),
                               size: 45.0,
                             ),
