@@ -20,8 +20,13 @@ class TabNavigatorRoutes {
 
 Map<String, Widget> _routes = {
   TabNavigatorRoutes.root: MainScreen(),
-  TabNavigatorRoutes.booking: BookingScreen(),
-  TabNavigatorRoutes.search: BlocProvider(create: (context) => TripBloc(tripRepository: TripRepository())..add(TripFetched()), child: SearchScreen()),
+  TabNavigatorRoutes.booking: BlocProvider(
+      create: (context) =>
+          TripBloc(tripRepository: TripRepository())..add(TripFetched()),
+      child: BookingScreen()),
+  TabNavigatorRoutes.search: BlocProvider(
+      create: (context) => TripBloc(tripRepository: TripRepository()),
+      child: SearchScreen()),
   TabNavigatorRoutes.createTrip: CreateTripScreen(),
   TabNavigatorRoutes.myMessage: MyMessageScreen(),
   TabNavigatorRoutes.myAccount: MyAccountScreen()

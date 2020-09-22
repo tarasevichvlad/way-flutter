@@ -1,18 +1,22 @@
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
+import 'package:way/models/user.dart';
 
 import 'passenger.dart';
 
 class Trip extends Equatable {
   String id;
-  Null driver;
+  User driver;
   int price;
   String comment;
   String from;
   String to;
   int seats;
-  String startingTime;
-  String finishTime;
+  DateTime startingTime;
+  DateTime finishTime;
   List<Passenger> passengers;
+  bool onlyTwoBehind;
+  double rating;
 
   Trip(
       {this.id,
@@ -24,24 +28,35 @@ class Trip extends Equatable {
       this.seats,
       this.startingTime,
       this.finishTime,
-      this.passengers});
+      this.passengers,
+      this.onlyTwoBehind,
+      this.rating});
 
   Trip.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-
+    if(json["driver"] != null) {
+      driver = User.fromJson(json["driver"]);
+    }
+    rating = json['rating'] != null ? json['rating']: 4.3;
+    onlyTwoBehind = json['onlyTwoBehind'];
     price = json['price'];
     comment = json['comment'];
     from = json['from'];
     to = json['to'];
     seats = json['seats'];
-    startingTime = json['startingTime'];
-    finishTime = json['finishTime'];
+    startingTime = DateTime.parse(json['startingTime']);
+    finishTime = DateTime.parse(json['finishTime']);
     if (json['passengers'] != null) {
       passengers = new List<Passenger>();
       json['passengers'].forEach((v) {
         passengers.add(new Passenger.fromJson(v));
       });
     }
+  }
+
+  int getAvailableSeats() {
+    final int t = this.passengers.length;
+    return this.seats - this.passengers.length;
   }
 
   @override
