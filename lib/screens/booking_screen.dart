@@ -10,20 +10,26 @@ class BookingScreen extends StatefulWidget {
 
 class _BookingScreenState extends State<BookingScreen> {
   final _scrollController = ScrollController();
-  final _scrollThreshold = 200.0;
-  TripBloc _postBloc;
+  var _lastRequestedTime = DateTime.now();
+  TripBloc _tripBloc;
+
+  static const TextStyle textStyleBaseTheme = TextStyle(
+      fontFamily: 'ComicSansMS',
+      fontSize: 30,
+      color: Colors.grey,);
 
   @override
   void initState() {
     super.initState();
     _scrollController.addListener(_onScroll);
-    _postBloc = BlocProvider.of<TripBloc>(context);
+    _tripBloc = BlocProvider.of<TripBloc>(context);
   }
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<TripBloc, TripState>(
       builder: (context, state) {
+        
         if (state is TripInitial) {
           return Center(
             child: CircularProgressIndicator(),
@@ -32,16 +38,33 @@ class _BookingScreenState extends State<BookingScreen> {
 
         if (state is TripFailure) {
           return Center(
-            child: Text('failed to fetch trips'),
+            child: Text('Упс что то пошло не так'),
           );
         }
 
         if (state is TripSuccess) {
           if (state.trips.isEmpty) {
             return Center(
-              child: Text('no trips'),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text("На данный момент", style: textStyleBaseTheme,),
+                  Text("у Вас нет активных", style: textStyleBaseTheme,),
+                  Text("бронирований", style: textStyleBaseTheme,),
+                  Padding(
+                    padding: EdgeInsets.only(top: 42),
+                    child: Image.asset(
+                      'assets/images/booking.jpg',
+                      width: 341,
+                      height: 400,
+                    ),
+                  )
+                ],
+              ),
             );
           }
+
+          print(state.trips);
 
           return ListView.builder(
             itemBuilder: (BuildContext context, int index) {
@@ -68,10 +91,11 @@ class _BookingScreenState extends State<BookingScreen> {
   }
 
   void _onScroll() {
-    final maxScroll = _scrollController.position.maxScrollExtent;
     final currentScroll = _scrollController.position.pixels;
-    if (maxScroll - currentScroll <= _scrollThreshold) {
-      _postBloc.add(TripFetched());
+    final availableToHttp = DateTime.now().difference(_lastRequestedTime).inSeconds > 1;
+    if ( availableToHttp && currentScroll <= -130) {
+      _lastRequestedTime = DateTime.now();
+      _tripBloc.add(TripFetched());
     }
   }
 }

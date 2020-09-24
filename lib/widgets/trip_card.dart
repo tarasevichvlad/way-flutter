@@ -81,8 +81,9 @@ class TripCard extends StatelessWidget {
                       bottomLeft: Radius.circular(15.0),
                       bottomRight: Radius.circular(15.0))),
               child: Padding(
-                padding: const EdgeInsets.only(left: 25),
+                padding: const EdgeInsets.only(left: 20, right: 20),
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     Icon(
                       Icons.account_circle,
@@ -90,7 +91,7 @@ class TripCard extends StatelessWidget {
                       size: 45.0,
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(left: 25, right: 15),
+                      padding: const EdgeInsets.only(left: 0, right: 0),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -149,14 +150,14 @@ class TripCard extends StatelessWidget {
                     ),
                     trip.onlyTwoBehind
                         ? Padding(
-                            padding: const EdgeInsets.only(left: 10, right: 0),
+                            padding: const EdgeInsets.only(left: 0, right: 0),
                             child: Icon(
                               Icons.people_outline,
                               color: const Color(0xff12616a),
                               size: 45.0,
                             ),
                           )
-                        : Text("")
+                        : Container(width: 45)
                   ],
                 ),
               ),
