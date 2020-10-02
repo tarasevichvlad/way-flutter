@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:way/blocs/blocs.dart';
-import 'package:way/models/trip.dart';
 import 'package:way/widgets/trip_card.dart';
 
 class BookingScreen extends StatefulWidget {
@@ -11,9 +10,7 @@ class BookingScreen extends StatefulWidget {
 
 class _BookingScreenState extends State<BookingScreen> {
   final _scrollController = ScrollController();
-  var _lastRequestedTime = DateTime.now();
   TripBloc _tripBloc;
-  List<Trip> _currentTrips = List<Trip>();
 
   static const TextStyle textStyleBaseTheme = TextStyle(
     fontFamily: 'ComicSansMS',
@@ -82,8 +79,6 @@ class _BookingScreenState extends State<BookingScreen> {
               ),
             );
           }
-
-          _currentTrips = state.trips;
 
           return RefreshIndicator(
             onRefresh: () async {
