@@ -1,12 +1,13 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:way/models/trip.dart';
 
 class TripCard extends StatelessWidget {
   final Trip trip;
   static const TextStyle textStyleWhite =
       TextStyle(fontFamily: 'Comic Sans MS', fontSize: 18, color: Colors.white);
+  static const TextPaddingTop = const EdgeInsets.only(left: 3, right: 3);
+  static const TextPaddingBottom = const EdgeInsets.only(left: 3, right: 3, top: 22);
 
   static const TextStyle textStyleBaseTheme = TextStyle(
       fontFamily: 'Comic Sans MS',
@@ -29,48 +30,81 @@ class TripCard extends StatelessWidget {
                     borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(15.0),
                         topRight: Radius.circular(15.0))),
-                child: Stack(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(left: 25, top: 3),
-                      child: Row(
-                        children: [
-                          Text(
-                            '${trip.getStartDate()}',
-                            style: textStyleWhite,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 3, right: 3),
-                            child: SvgPicture.string(circle),
-                          ),
-                          Text(
-                            '${trip.from}',
-                            style: textStyleWhite,
-                          )
-                        ],
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 25, top: 9),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        height: 60,
+                        child: Stack(
+                          children: [
+                            Padding(
+                              padding: TextPaddingTop,
+                              child: Text(
+                                '${trip.getStartDate()}',
+                                style: textStyleWhite,
+                              ),
+                            ),
+                            Padding(
+                              padding: TextPaddingBottom,
+                              child: Text(
+                                '${trip.getFinishDate()}',
+                                style: textStyleWhite,
+                              ),
+                            )
+                          ],
+                        ),
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 25, top: 27),
-                      child: Row(
-                        children: [
-                          Text(
-                            '${trip.getFinishDate()}',
-                            style: textStyleWhite,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 3, right: 3),
-                            child: SvgPicture.string(circle),
-                          ),
-                          Text(
-                            '${trip.to}',
-                            style: textStyleWhite,
+                      SizedBox(
+                          height: 60,
+                          child: Stack(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(left: 5, right: 5, top: 4),
+                                child: Icon(
+                                  Icons.brightness_1,
+                                  color: Colors.white,
+                                  size: 14.0,
+                                )//SvgPicture.string(circle),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(left: 5, right: 5, top: 26),
+                                child: Icon(
+                                  Icons.brightness_1,
+                                  color: Colors.white,
+                                  size: 14.0,
+                                ),
+                              ),
+                            ],
                           )
-                        ],
                       ),
-                    )
-                  ],
-                )),
+                      SizedBox(
+                        height: 60,
+                        child: Stack(
+                          children: [
+                            Padding(
+                              padding: TextPaddingTop,
+                              child: Text(
+                                '${trip.from}',
+                                style: textStyleWhite,
+                              ),
+                            ),
+                            Padding(
+                              padding: TextPaddingBottom,
+                              child: Text(
+                                '${trip.to}',
+                                style: textStyleWhite,
+                              ),
+                            )
+                          ],
+                        )
+                      )
+                    ],
+                  ),
+                )
+            ),
           ),
           SizedBox(
             height: 60,
@@ -168,5 +202,3 @@ class TripCard extends StatelessWidget {
     );
   }
 }
-
-const String circle = '<svg viewBox="0 0 30 30" color="red" xmlns="http://www.w3.org/2000/svg"> <circle cx="15" cy="15" r="6" fill="white"/> </svg>';

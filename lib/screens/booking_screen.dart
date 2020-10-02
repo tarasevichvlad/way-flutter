@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:way/blocs/blocs.dart';
+import 'package:way/models/trip.dart';
 import 'package:way/widgets/trip_card.dart';
 
 class BookingScreen extends StatefulWidget {
@@ -12,16 +13,17 @@ class _BookingScreenState extends State<BookingScreen> {
   final _scrollController = ScrollController();
   var _lastRequestedTime = DateTime.now();
   TripBloc _tripBloc;
+  List<Trip> _currentTrips = List<Trip>();
 
   static const TextStyle textStyleBaseTheme = TextStyle(
-      fontFamily: 'ComicSansMS',
-      fontSize: 30,
-      color: Colors.grey,);
+    fontFamily: 'ComicSansMS',
+    fontSize: 30,
+    color: Colors.grey,
+  );
 
   @override
   void initState() {
     super.initState();
-    _scrollController.addListener(_onScroll);
     _tripBloc = BlocProvider.of<TripBloc>(context);
   }
 
@@ -29,7 +31,6 @@ class _BookingScreenState extends State<BookingScreen> {
   Widget build(BuildContext context) {
     return BlocBuilder<TripBloc, TripState>(
       builder: (context, state) {
-        
         if (state is TripInitial) {
           return Center(
             child: CircularProgressIndicator(),
@@ -38,19 +39,37 @@ class _BookingScreenState extends State<BookingScreen> {
 
         if (state is TripFailure) {
           return Center(
-            child: Text('Упс что то пошло не так'),
-          );
+              child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text("Упс что то пошло не так"),
+              RaisedButton(
+                  child: Text("Попробовать еще раз"),
+                  onPressed: () {
+                    _tripBloc.add(TripFetched());
+                  })
+            ],
+          ));
         }
 
-        if (state is TripSuccess) {
+       if (state is TripSuccess) {
           if (state.trips.isEmpty) {
             return Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text("На данный момент", style: textStyleBaseTheme,),
-                  Text("у Вас нет активных", style: textStyleBaseTheme,),
-                  Text("бронирований", style: textStyleBaseTheme,),
+                  Text(
+                    "На данный момент",
+                    style: textStyleBaseTheme,
+                  ),
+                  Text(
+                    "у Вас нет активных",
+                    style: textStyleBaseTheme,
+                  ),
+                  Text(
+                    "бронирований",
+                    style: textStyleBaseTheme,
+                  ),
                   Padding(
                     padding: EdgeInsets.only(top: 42),
                     child: Image.asset(
@@ -64,16 +83,23 @@ class _BookingScreenState extends State<BookingScreen> {
             );
           }
 
-          print(state.trips);
+          _currentTrips = state.trips;
 
-          return ListView.builder(
-            itemBuilder: (BuildContext context, int index) {
-
-              return index < state.trips.length ?  TripCard(trip: state.trips[index]) : Text("");
+          return RefreshIndicator(
+            onRefresh: () async {
+              _tripBloc.add(TripFetched());
             },
-            padding: const EdgeInsets.only(left: 15, right: 15),
-            itemCount:state.trips.length,
-            controller: _scrollController,
+            child: ListView.builder(
+              physics: const AlwaysScrollableScrollPhysics(),
+              itemBuilder: (BuildContext context, int index) {
+                return index < state.trips.length
+                    ? TripCard(trip: state.trips[index])
+                    : Text("");
+              },
+              padding: const EdgeInsets.only(left: 15, right: 15),
+              itemCount: state.trips.length,
+              controller: _scrollController,
+            ),
           );
         }
 
@@ -88,14 +114,5 @@ class _BookingScreenState extends State<BookingScreen> {
   void dispose() {
     _scrollController.dispose();
     super.dispose();
-  }
-
-  void _onScroll() {
-    final currentScroll = _scrollController.position.pixels;
-    final availableToHttp = DateTime.now().difference(_lastRequestedTime).inSeconds > 1;
-    if ( availableToHttp && currentScroll <= -130) {
-      _lastRequestedTime = DateTime.now();
-      _tripBloc.add(TripFetched());
-    }
   }
 }

@@ -12,11 +12,12 @@ class TripBloc extends Bloc<TripEvent, TripState> {
   @override
   Stream<TripState> mapEventToState(TripEvent event) async* {
     try {
-      //if (event is TripInitial) {
-        final trips = await tripRepository.getAllTrip();
-        yield TripSuccess(trips: trips);
-        return;
-      //}
+      if (event is TripInitial) {
+        yield TripInitial();
+      }
+
+      final trips = await tripRepository.getAllTrip();
+      yield TripSuccess(trips: trips);
     } catch(_){
       yield TripFailure();
     }
