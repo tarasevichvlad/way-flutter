@@ -6,4 +6,5 @@ abstract class TripEvent extends Equatable {
 }
 
 class TripFetched extends TripEvent {}
-class TripReFetched extends TripEvent {}
+class TripActive extends TripEvent {}
+class TripFinished extends TripEvent {}
