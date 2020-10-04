@@ -22,6 +22,7 @@ class TripList extends StatelessWidget {
   Widget build(BuildContext context) {
     return RefreshIndicator(
       onRefresh: () async {
+        this.tripBloc.add(TripFetched());
         return this.tripBloc.add(tripEvent);
       },
       child: ListView.builder(

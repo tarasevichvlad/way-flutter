@@ -12,7 +12,6 @@ import 'loading.dart';
 class ActiveTripsTab extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => _ActiveTripsTabState();
-
 }
 
 class _ActiveTripsTabState extends State<ActiveTripsTab> {
