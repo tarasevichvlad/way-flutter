@@ -1,6 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:way/models/trip.dart';
+import 'package:way/utils/constants.dart';
 
 class TripCard extends StatelessWidget {
   final Trip trip;
@@ -9,10 +10,10 @@ class TripCard extends StatelessWidget {
   static const TextPaddingTop = const EdgeInsets.only(left: 3, right: 3);
   static const TextPaddingBottom = const EdgeInsets.only(left: 3, right: 3, top: 22);
 
-  static const TextStyle textStyleBaseTheme = TextStyle(
+  static TextStyle textStyleBaseTheme = TextStyle(
       fontFamily: 'Comic Sans MS',
       fontSize: 18,
-      color: const Color(0xff12616a));
+      color: Constants.baseColor);
 
   TripCard({@required this.trip});
 
@@ -26,7 +27,7 @@ class TripCard extends StatelessWidget {
             height: 60,
             child: Container(
                 decoration: BoxDecoration(
-                    color: const Color(0xff12616a),
+                    color: Constants.baseColor,
                     borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(15.0),
                         topRight: Radius.circular(15.0))),
@@ -65,7 +66,7 @@ class TripCard extends StatelessWidget {
                                 padding: const EdgeInsets.only(left: 5, right: 5, top: 4),
                                 child: Icon(
                                   Icons.brightness_1,
-                                  color: Colors.white,
+                                  color: Constants.whiteColor,
                                   size: 14.0,
                                 )//SvgPicture.string(circle),
                               ),
@@ -73,7 +74,7 @@ class TripCard extends StatelessWidget {
                                 padding: const EdgeInsets.only(left: 5, right: 5, top: 26),
                                 child: Icon(
                                   Icons.brightness_1,
-                                  color: Colors.white,
+                                  color: Constants.whiteColor,
                                   size: 14.0,
                                 ),
                               ),
@@ -110,7 +111,7 @@ class TripCard extends StatelessWidget {
             height: 60,
             child: Container(
               decoration: BoxDecoration(
-                  color: Color.fromRGBO(245, 245, 243, 100),
+                  color: Constants.greyColor,
                   borderRadius: BorderRadius.only(
                       bottomLeft: Radius.circular(15.0),
                       bottomRight: Radius.circular(15.0))),
@@ -121,7 +122,7 @@ class TripCard extends StatelessWidget {
                   children: [
                     Icon(
                       Icons.account_circle,
-                      color: const Color(0xff12616a),
+                      color: Constants.baseColor,
                       size: 45.0,
                     ),
                     Padding(
@@ -137,7 +138,7 @@ class TripCard extends StatelessWidget {
                             children: [
                               Icon(
                                 Icons.star,
-                                color: const Color(0xff12616a),
+                                color: Constants.baseColor,
                                 size: 20.0,
                               ),
                               Padding(
@@ -151,7 +152,7 @@ class TripCard extends StatelessWidget {
                                 padding: const EdgeInsets.only(left: 25),
                                 child: Icon(
                                   Icons.work,
-                                  color: const Color(0xff12616a),
+                                  color: Constants.baseColor,
                                   size: 20.0,
                                 ),
                               ),
@@ -166,7 +167,7 @@ class TripCard extends StatelessWidget {
                                 padding: const EdgeInsets.only(left: 25),
                                 child: Icon(
                                   Icons.event_seat,
-                                  color: const Color(0xff12616a),
+                                  color: Constants.baseColor,
                                   size: 20.0,
                                 ),
                               ),
@@ -187,7 +188,7 @@ class TripCard extends StatelessWidget {
                             padding: const EdgeInsets.only(left: 0, right: 0),
                             child: Icon(
                               Icons.people_outline,
-                              color: const Color(0xff12616a),
+                              color: Constants.baseColor,
                               size: 45.0,
                             ),
                           )

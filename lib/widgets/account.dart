@@ -3,9 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:way/blocs/user/user_bloc.dart';
+import 'package:way/blocs/user/user_event.dart';
 import 'package:way/blocs/user/user_state.dart';
+import 'package:way/utils/constants.dart';
 
 import 'loading.dart';
+import 'review_list.dart';
 
 class Account extends StatefulWidget {
   @override
@@ -39,15 +42,17 @@ class _AccountState extends State<Account> {
           return Loading();
         }
 
-        /*if (state is TripFailure) {
-          return TripFailureList(_tripBloc);
-        }*/
+        if (state is UserReviewsSuccess) {
+          return ReviewList(userBloc: this._userBloc, user: state.user);
+        }
 
         if (state is UserSuccess) {
+
           return Column(
             children: [
               Container(
-                margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                margin:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
                 decoration: BoxDecoration(
                     color: const Color.fromRGBO(245, 245, 243, 100),
                     borderRadius: BorderRadius.all(Radius.elliptical(15, 15))),
@@ -59,7 +64,7 @@ class _AccountState extends State<Account> {
                         padding: const EdgeInsets.symmetric(vertical: 25),
                         child: Icon(
                           Icons.account_circle,
-                          color: const Color(0xff12616a),
+                          color: Constants.baseColor,
                           size: 80.0,
                         ),
                       ),
@@ -75,27 +80,27 @@ class _AccountState extends State<Account> {
                         children: [
                           Icon(
                             Icons.star,
-                            color: const Color(0xff12616a),
+                            color: Constants.baseColor,
                             size: 30.0,
                           ),
                           Icon(
                             Icons.star,
-                            color: const Color(0xff12616a),
+                            color: Constants.baseColor,
                             size: 30.0,
                           ),
                           Icon(
                             Icons.star,
-                            color: const Color(0xff12616a),
+                            color: Constants.baseColor,
                             size: 30.0,
                           ),
                           Icon(
                             Icons.star,
-                            color: const Color(0xff12616a),
+                            color: Constants.baseColor,
                             size: 30.0,
                           ),
                           Icon(
                             Icons.star,
-                            color: const Color(0xff12616a),
+                            color: Constants.baseColor,
                             size: 30.0,
                           ),
                           Padding(
@@ -120,37 +125,33 @@ class _AccountState extends State<Account> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Column(
-                              children: [
-                                Text(
-                                  state.user.tripCount.toString(),
-                                  style: textStyle1,
-                                ),
+                            GestureDetector(
+                              onTap: () {
+                                print("The place for navigate to trips");
+                              },
+                              child: Column(children: [
+                                Text(state.user.tripCount.toString(), style: textStyle1),
                                 SizedBox(height: 5),
-                                Text(
-                                  "Поездок",
-                                  style: textStyle1,
-                                )
-                              ],
+                                Text("Поездок", style: textStyle1)
+                              ]),
                             ),
                             VerticalDivider(
                               color: Colors.black,
                               thickness: 0.5,
                               width: 50,
                             ),
-                            Column(
-                              children: [
-                                Text(
-                                  state.user.reviews.length.toString(),
-                                  style: textStyle1,
-                                ),
-                                SizedBox(height: 5),
-                                Text(
-                                  "Отзывов",
-                                  style: textStyle1,
-                                )
-                              ],
-                            )
+                            GestureDetector(
+                              onTap: () {
+                                _userBloc.add(UserReviewFetched());
+                              },
+                              child: Column(
+                                children: [
+                                  Text(state.user.reviews.length.toString(), style: textStyle1),
+                                  SizedBox(height: 5),
+                                  Text("Отзывов", style: textStyle1)
+                                ],
+                              ),
+                            ),
                           ],
                         ),
                       ),
@@ -161,15 +162,16 @@ class _AccountState extends State<Account> {
               Container(
                 margin: const EdgeInsets.symmetric(horizontal: 20),
                 decoration: BoxDecoration(
-                    color: const Color.fromRGBO(245, 245, 243, 100),
+                    color: Constants.greyColor,
                     borderRadius: BorderRadius.all(Radius.elliptical(15, 15))),
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 30),
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 15, horizontal: 30),
                   child: Row(
                     children: [
                       Icon(
                         Icons.phone_iphone,
-                        color: const Color(0xff12616a),
+                        color: Constants.baseColor,
                         size: 30.0,
                       ),
                       Text(state.user.phone ?? "Телефон не указан")

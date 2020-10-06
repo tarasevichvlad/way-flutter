@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:way/utils/constants.dart';
 import '../navigation_bar.dart';
 import '../routes.dart';
 
@@ -21,7 +22,7 @@ class _HomePageState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Constants.whiteColor,
       body: SafeArea(
         child: IndexedStack(
           index: _currentIndexPage,

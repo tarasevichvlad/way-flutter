@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:way/utils/constants.dart';
 
 class MainScreen extends StatelessWidget {
   @override
@@ -15,7 +16,7 @@ class MainScreen extends StatelessWidget {
                   'Найди новое место,',
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                      color: Colors.grey,
+                      color: Constants.baseColor,
                       fontFamily: 'ComicSansMS',
                       fontSize: 30),
                 ),
@@ -23,7 +24,7 @@ class MainScreen extends StatelessWidget {
                   'путешествия',
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                      color: Colors.grey,
+                      color: Constants.baseColor,
                       fontFamily: 'ComicSansMS',
                       fontSize: 30),
                 ),
@@ -31,7 +32,7 @@ class MainScreen extends StatelessWidget {
                   'и людей',
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                      color: Colors.grey,
+                      color: Constants.baseColor,
                       fontFamily: 'ComicSansMS',
                       fontSize: 30),
                 ),

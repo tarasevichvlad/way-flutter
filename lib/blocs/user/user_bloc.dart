@@ -30,7 +30,11 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       user.addTripCount(trips.length);
       user.addReviews(reviews ?? List<Review>());
 
-      yield UserSuccess(user: user);
+      if(event is UserFetched){
+        yield UserSuccess(user: user);
+      } else {
+        yield UserReviewsSuccess(user: user);
+      }
     } catch (_) {
       yield UserFailure();
     }

@@ -6,3 +6,4 @@ abstract class UserEvent extends Equatable {
 }
 
 class UserFetched extends UserEvent {}
+class UserReviewFetched extends UserEvent {}

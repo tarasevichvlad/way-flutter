@@ -26,3 +26,7 @@ class UserSuccess extends UserState {
   @override
   List<Object> get props => [user];
 }
+
+class UserReviewsSuccess extends UserSuccess {
+  UserReviewsSuccess({user}) : super(user: user);
+}

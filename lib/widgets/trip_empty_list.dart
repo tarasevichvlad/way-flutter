@@ -1,11 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:way/utils/constants.dart';
 
 class TripEmptyList extends StatelessWidget {
-  static const TextStyle textStyleBaseTheme = TextStyle(
+  static TextStyle textStyleBaseTheme = TextStyle(
     fontFamily: 'ComicSansMS',
     fontSize: 30,
-    color: Colors.grey,
+    color: Constants.greyColor,
   );
 
   String text;

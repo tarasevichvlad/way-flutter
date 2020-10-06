@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:way/blocs/blocs.dart';
 import 'package:way/services/trip/trip_repository.dart';
+import 'package:way/utils/constants.dart';
 import 'package:way/widgets/active_trips_tab.dart';
 import 'package:way/widgets/finished_trips_tab.dart';
 
@@ -20,9 +21,9 @@ class _BookingScreenState extends State<BookingScreen> {
       child: Scaffold(
         appBar: TabBar(
           indicatorColor: Colors.amber,
-          labelColor: Colors.white,
-          unselectedLabelColor: const Color(0xff12616a),
-          indicator: BoxDecoration(color: const Color(0xff12616a)),
+          labelColor: Constants.whiteColor,
+          unselectedLabelColor: Constants.baseColor,
+          indicator: BoxDecoration(color: Constants.baseColor),
           tabs: [
             Tab(text: "Активные"),
             Tab(text: "Завершенные")
