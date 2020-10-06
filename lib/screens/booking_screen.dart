@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:way/blocs/blocs.dart';
-import 'package:way/services/trip_repository.dart';
+import 'package:way/services/trip/trip_repository.dart';
 import 'package:way/widgets/active_trips_tab.dart';
 import 'package:way/widgets/finished_trips_tab.dart';
 

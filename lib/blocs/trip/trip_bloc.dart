@@ -1,5 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:way/services/trip_repository.dart';
+import 'package:way/services/trip/trip_repository.dart';
 
 import '../blocs.dart';
 
@@ -18,12 +18,12 @@ class TripBloc extends Bloc<TripEvent, TripState> {
       }
 
       if(event is TripActive) {
-        final trips = await tripRepository.getActiveTrip();
+        final trips = await tripRepository.getActiveTrips();
         yield TripSuccess(trips: trips);
       }
 
       if(event is TripFinished) {
-        final trips = await tripRepository.getFinishedTrip();
+        final trips = await tripRepository.getFinishedTrips();
         yield TripSuccess(trips: trips);
       }
     } catch(_){

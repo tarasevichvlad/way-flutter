@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:way/models/user.dart';
 import 'package:way/utils/constants.dart';
 import 'package:http/http.dart' as http;
-import 'auth.dart';
+import '../auth.dart';
 
 class UserProvider {
   Auth auth;

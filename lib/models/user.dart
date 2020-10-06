@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:way/models/review.dart';
 import 'car.dart';
 
 class User extends Equatable{
@@ -8,6 +9,8 @@ class User extends Equatable{
   String phone;
   Car car;
   double rating;
+  int tripCount;
+  List<Review> reviews;
 
   User();
   @override
@@ -27,5 +30,13 @@ class User extends Equatable{
   String getFullName()
   {
     return '${this.firstName} ${this.lastName}';
+  }
+
+  void addReviews(List<Review> reviews) {
+    this.reviews = reviews;
+  }
+
+  void addTripCount(int tripCount) {
+    this.tripCount = tripCount;
   }
 }

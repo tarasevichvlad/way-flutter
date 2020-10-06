@@ -1,5 +1,5 @@
 import 'package:way/models/user.dart';
-import 'package:way/services/user_api_provider.dart';
+import 'package:way/services/user/user_api_provider.dart';
 
 class UserRepository {
   UserProvider _userProvider = UserProvider();

@@ -8,8 +8,6 @@ import 'package:way/blocs/user/user_state.dart';
 import 'loading.dart';
 
 class Account extends StatefulWidget {
-
-
   @override
   State<StatefulWidget> createState() => _AccountState();
 }
@@ -125,7 +123,7 @@ class _AccountState extends State<Account> {
                             Column(
                               children: [
                                 Text(
-                                  "?",
+                                  state.user.tripCount.toString(),
                                   style: textStyle1,
                                 ),
                                 SizedBox(height: 5),
@@ -143,7 +141,7 @@ class _AccountState extends State<Account> {
                             Column(
                               children: [
                                 Text(
-                                  "?",
+                                  state.user.reviews.length.toString(),
                                   style: textStyle1,
                                 ),
                                 SizedBox(height: 5),
