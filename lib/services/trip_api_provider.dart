@@ -21,7 +21,7 @@ class TripProvider {
     final response = await http.post(Constants.getBaseUrl() + '/trips/search',
         headers: {
           'Authorization': Constants.TOKEN_ID,
-          "Content-Type": "application/json"
+          'Content-Type': 'application/json'
         },
         body: json.encode(data));
     if (response.statusCode == 200) {

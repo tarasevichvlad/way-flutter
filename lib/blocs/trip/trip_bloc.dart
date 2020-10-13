@@ -11,7 +11,7 @@ class TripBloc extends Bloc<TripEvent, TripState> {
 
   @override
   Stream<TripState> mapEventToState(TripEvent event) async* {
-    if (event is TripInitial) {
+    if (event is TripFetched) {
       try {
         final trips = await tripRepository.getAllTrip();
         yield TripSuccess(trips: trips);
