@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:way/blocs/blocs.dart';
+import 'package:way/blocs/navigation/navigation_bloc.dart';
+import 'package:way/blocs/navigation/navigation_event.dart';
 import 'package:way/models/search_trip.dart';
 import 'package:way/search_icons.dart';
 
@@ -29,12 +31,9 @@ class _SearchScreenState extends State<SearchScreen> {
     return BlocListener<TripBloc, TripState>(
       listener: (BuildContext context, TripState state) {
         if (state is TripSearchSuccess) {
-          Navigator.of(context)
-              .push(MaterialPageRoute(builder: (BuildContext context) {
-            return Scaffold(
-              body: Text('13'),
-            );
-          }));
+          // TODO: navigate to new page
+          //BlocProvider.of<NavigationBloc>(context)
+          //.add(NavgationStart(pathTo: 'test'));
         }
       },
       child: Container(
