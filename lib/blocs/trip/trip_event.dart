@@ -16,3 +16,7 @@ class TripSearchRequested extends TripEvent {
   @override
   List<Object> get props => [searchTrip];
 }
+
+class TripActive extends TripEvent {}
+
+class TripFinished extends TripEvent {}

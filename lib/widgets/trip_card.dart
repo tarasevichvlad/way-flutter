@@ -1,17 +1,19 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:way/models/trip.dart';
+import 'package:way/utils/constants.dart';
 
 class TripCard extends StatelessWidget {
   final Trip trip;
   static const TextStyle textStyleWhite =
-      TextStyle(fontFamily: 'Comic Sans MS', fontSize: 16, color: Colors.white);
+      TextStyle(fontFamily: 'Comic Sans MS', fontSize: 18, color: Colors.white);
+  static const TextPaddingTop = const EdgeInsets.only(left: 3, right: 3);
+  static const TextPaddingBottom = const EdgeInsets.only(left: 3, right: 3, top: 22);
 
-  static const TextStyle textStyleBaseTheme = TextStyle(
+  static TextStyle textStyleBaseTheme = TextStyle(
       fontFamily: 'Comic Sans MS',
-      fontSize: 16,
-      color: const Color(0xff12616a));
+      fontSize: 18,
+      color: Constants.baseColor);
 
   TripCard({@required this.trip});
 
@@ -25,116 +27,156 @@ class TripCard extends StatelessWidget {
             height: 60,
             child: Container(
                 decoration: BoxDecoration(
-                    color: const Color(0xff12616a),
+                    color: Constants.baseColor,
                     borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(15.0),
                         topRight: Radius.circular(15.0))),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(left: 25),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Text(
-                            '${trip.startingTime}',
-                            style: textStyleWhite,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 3, right: 3),
-                            child: SvgPicture.string(circle),
-                          ),
-                          Text(
-                            '${trip.from}',
-                            style: textStyleWhite,
-                          )
-                        ],
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 25, top: 9),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        height: 60,
+                        child: Stack(
+                          children: [
+                            Padding(
+                              padding: TextPaddingTop,
+                              child: Text(
+                                '${trip.getStartDate()}',
+                                style: textStyleWhite,
+                              ),
+                            ),
+                            Padding(
+                              padding: TextPaddingBottom,
+                              child: Text(
+                                '${trip.getFinishDate()}',
+                                style: textStyleWhite,
+                              ),
+                            )
+                          ],
+                        ),
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 25),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Text(
-                            '${trip.finishTime}',
-                            style: textStyleWhite,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 3, right: 3),
-                            child: SvgPicture.string(circle),
-                          ),
-                          Text(
-                            '${trip.to}',
-                            style: textStyleWhite,
+                      SizedBox(
+                          height: 60,
+                          child: Stack(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(left: 5, right: 5, top: 4),
+                                child: Icon(
+                                  Icons.brightness_1,
+                                  color: Constants.whiteColor,
+                                  size: 14.0,
+                                )//SvgPicture.string(circle),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(left: 5, right: 5, top: 26),
+                                child: Icon(
+                                  Icons.brightness_1,
+                                  color: Constants.whiteColor,
+                                  size: 14.0,
+                                ),
+                              ),
+                            ],
                           )
-                        ],
                       ),
-                    )
-                  ],
-                )),
+                      SizedBox(
+                        height: 60,
+                        child: Stack(
+                          children: [
+                            Padding(
+                              padding: TextPaddingTop,
+                              child: Text(
+                                '${trip.from}',
+                                style: textStyleWhite,
+                              ),
+                            ),
+                            Padding(
+                              padding: TextPaddingBottom,
+                              child: Text(
+                                '${trip.to}',
+                                style: textStyleWhite,
+                              ),
+                            )
+                          ],
+                        )
+                      )
+                    ],
+                  ),
+                )
+            ),
           ),
           SizedBox(
             height: 60,
             child: Container(
               decoration: BoxDecoration(
-                  color: Color.fromRGBO(245, 245, 243, 100),
+                  color: Constants.greyColor,
                   borderRadius: BorderRadius.only(
                       bottomLeft: Radius.circular(15.0),
                       bottomRight: Radius.circular(15.0))),
               child: Padding(
-                padding: const EdgeInsets.only(left: 25),
+                padding: const EdgeInsets.only(left: 20, right: 20),
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     Icon(
                       Icons.account_circle,
-                      color: const Color(0xff12616a),
+                      color: Constants.baseColor,
                       size: 45.0,
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(left: 25, right: 15),
+                      padding: const EdgeInsets.only(left: 0, right: 0),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            '${trip.driver.firstName} ${trip.driver.lastName}',
+                            '${trip.driver.getFullName()}',
                             style: textStyleBaseTheme,
                           ),
                           Row(
                             children: [
                               Icon(
                                 Icons.star,
-                                color: const Color(0xff12616a),
+                                color: Constants.baseColor,
                                 size: 20.0,
                               ),
-                              Text(
-                                "${trip.rating}",
-                                style: textStyleBaseTheme,
+                              Padding(
+                                padding: const EdgeInsets.only(left: 3),
+                                child: Text(
+                                  "${trip.driver.rating}",
+                                  style: textStyleBaseTheme,
+                                ),
                               ),
                               Padding(
                                 padding: const EdgeInsets.only(left: 25),
                                 child: Icon(
-                                  Icons.local_offer,
-                                  color: const Color(0xff12616a),
+                                  Icons.work,
+                                  color: Constants.baseColor,
                                   size: 20.0,
                                 ),
                               ),
-                              Text(
-                                "${trip.price}р",
-                                style: textStyleBaseTheme,
-                              ),
+                             Padding(
+                               padding: const EdgeInsets.only(left: 3),
+                               child:  Text(
+                                 "${trip.price}р",
+                                 style: textStyleBaseTheme,
+                               ),
+                             ),
                               Padding(
                                 padding: const EdgeInsets.only(left: 25),
                                 child: Icon(
-                                  Icons.airline_seat_recline_normal,
-                                  color: const Color(0xff12616a),
+                                  Icons.event_seat,
+                                  color: Constants.baseColor,
                                   size: 20.0,
                                 ),
                               ),
-                              Text(
-                                "${trip.seats - trip.passengers.length}",
-                                style: textStyleBaseTheme,
+                              Padding(
+                                padding: const EdgeInsets.only(left: 3),
+                                child: Text(
+                                  "${trip.seats - trip.passengers.length}",
+                                  style: textStyleBaseTheme,
+                                ),
                               )
                             ],
                           )
@@ -143,14 +185,14 @@ class TripCard extends StatelessWidget {
                     ),
                     trip.onlyTwoBehind
                         ? Padding(
-                            padding: const EdgeInsets.only(left: 20, right: 0),
+                            padding: const EdgeInsets.only(left: 0, right: 0),
                             child: Icon(
-                              Icons.group,
-                              color: const Color(0xff12616a),
+                              Icons.people_outline,
+                              color: Constants.baseColor,
                               size: 45.0,
                             ),
                           )
-                        : Text("")
+                        : Container(width: 45)
                   ],
                 ),
               ),
@@ -161,5 +203,3 @@ class TripCard extends StatelessWidget {
     );
   }
 }
-
-const String circle = '<svg viewBox="0 0 30 30" color="red" xmlns="http://www.w3.org/2000/svg"> <circle cx="15" cy="15" r="6" fill="white"/> </svg>';

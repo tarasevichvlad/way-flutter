@@ -13,9 +13,11 @@ class TripInitial extends TripState {}
 class TripFailure extends TripState {}
 
 class TripSuccess extends TripState {
-  final List<Trip> trips;
+  List<Trip> trips;
 
-  const TripSuccess({this.trips});
+  TripSuccess({this.trips}) {
+   trips =  this.trips ?? List<Trip>();
+  }
 
   TripSuccess copyWith({List<Trip> trips, bool hasReachedMax}) {
     return TripSuccess(

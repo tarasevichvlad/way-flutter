@@ -1,6 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:way/services/trip_repository.dart';
-import 'blocs/blocs.dart';
+import 'package:way/services/trip/trip_repository.dart';
+
+import 'blocs/trip/trip_bloc.dart';
+import 'blocs/trip/trip_state.dart';
 import 'screens/booking_screen.dart';
 import 'screens/search_screen.dart';
 import 'screens/create_trip_screen.dart';
@@ -20,12 +22,9 @@ class TabNavigatorRoutes {
 
 Map<String, Widget> _routes = {
   TabNavigatorRoutes.root: MainScreen(),
-  TabNavigatorRoutes.booking: BlocProvider(
-      create: (context) =>
-          TripBloc(tripRepository: TripRepository())..add(TripFetched()),
-      child: BookingScreen()),
+  TabNavigatorRoutes.booking: BookingScreen(),
   TabNavigatorRoutes.search: BlocProvider(
-      create: (context) => TripBloc(tripRepository: TripRepository()),
+      create: (context) => TripBloc(TripRepository(), TripInitial()),
       child: SearchScreen()),
   TabNavigatorRoutes.createTrip: CreateTripScreen(),
   TabNavigatorRoutes.myMessage: MyMessageScreen(),

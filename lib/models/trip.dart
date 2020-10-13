@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
 import 'package:way/models/user.dart';
+import 'package:intl/intl.dart';
 
 import 'passenger.dart';
 
@@ -16,7 +16,6 @@ class Trip extends Equatable {
   DateTime finishTime;
   List<Passenger> passengers;
   bool onlyTwoBehind;
-  double rating;
 
   Trip(
       {this.id,
@@ -29,15 +28,14 @@ class Trip extends Equatable {
       this.startingTime,
       this.finishTime,
       this.passengers,
-      this.onlyTwoBehind,
-      this.rating});
+      this.onlyTwoBehind});
 
   Trip.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     if(json["driver"] != null) {
       driver = User.fromJson(json["driver"]);
     }
-    rating = json['rating'] != null ? json['rating']: 4.3;
+
     onlyTwoBehind = json['onlyTwoBehind'];
     price = json['price'];
     comment = json['comment'];
@@ -57,6 +55,16 @@ class Trip extends Equatable {
   int getAvailableSeats() {
     final int t = this.passengers.length;
     return this.seats - this.passengers.length;
+  }
+
+  String getStartDate()
+  {
+    return DateFormat('yyyy.MM.dd').add_Hm().format(this.startingTime);
+  }
+
+  String getFinishDate()
+  {
+    return DateFormat('yyyy.MM.dd').add_Hm().format(this.finishTime);
   }
 
   @override
