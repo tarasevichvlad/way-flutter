@@ -8,7 +8,8 @@ class TripBloc extends Bloc<TripEvent, TripState> {
 
   final TripState tripDefaultState;
 
-  TripBloc(this.tripRepository, this.tripDefaultState) : super(tripDefaultState);
+  TripBloc(this.tripRepository, this.tripDefaultState)
+      : super(tripDefaultState);
 
   @override
   Stream<TripState> mapEventToState(TripEvent event) async* {
@@ -17,16 +18,25 @@ class TripBloc extends Bloc<TripEvent, TripState> {
         yield TripInitial();
       }
 
-      if(event is TripActive) {
+      if (event is TripActive) {
         final trips = await tripRepository.getActiveTrips();
         yield TripSuccess(trips: trips);
       }
 
-      if(event is TripFinished) {
+      if (event is TripFinished) {
         final trips = await tripRepository.getFinishedTrips();
         yield TripSuccess(trips: trips);
       }
-    } catch(_){
+
+      if (event is TripSearchRequested) {
+        try {
+          final trips = await tripRepository.searchTrips(event.searchTrip);
+          yield TripSearchSuccess(trips: trips);
+        } catch (_) {
+          yield TripSearchFailure();
+        }
+      }
+    } catch (_) {
       yield TripFailure();
     }
   }

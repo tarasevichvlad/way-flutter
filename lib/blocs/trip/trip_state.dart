@@ -19,9 +19,9 @@ class TripSuccess extends TripState {
    trips =  this.trips ?? List<Trip>();
   }
 
-  TripSuccess copyWith({ List<Trip> trips, bool hasReachedMax }){
+  TripSuccess copyWith({List<Trip> trips, bool hasReachedMax}) {
     return TripSuccess(
-        trips: trips ?? this.trips,
+      trips: trips ?? this.trips,
     );
   }
 
@@ -31,3 +31,16 @@ class TripSuccess extends TripState {
   @override
   String toString() => 'TripSuccess { trips: ${trips.length} }';
 }
+
+class TripSearch extends TripState {}
+
+class TripSearchSuccess extends TripState {
+  final List<Trip> trips;
+
+  const TripSearchSuccess({this.trips});
+
+  @override
+  List<Object> get props => [trips];
+}
+
+class TripSearchFailure extends TripState {}

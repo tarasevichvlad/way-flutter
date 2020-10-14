@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:way/blocs/navigation/navigation_bloc.dart';
+import 'package:way/blocs/navigation/navigation_state.dart';
 import 'package:way/utils/constants.dart';
 import '../navigation_bar.dart';
 import '../routes.dart';
@@ -22,12 +25,22 @@ class _HomePageState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomPadding: false,
       backgroundColor: Constants.whiteColor,
-      body: SafeArea(
-        child: IndexedStack(
-          index: _currentIndexPage,
-          children: routes,
-        ),
+      body: BlocProvider(
+        create: (context) => NavigationBloc(NavigationInitial()),
+        child: SafeArea(
+            child: BlocListener<NavigationBloc, NavigationState>(
+          listener: (BuildContext context, NavigationState state) {
+            if (state is NavigationSuccess) {
+              // TODO: map string to component
+            }
+          },
+          child: IndexedStack(
+            index: _currentIndexPage,
+            children: routes,
+          ),
+        )),
       ),
       bottomNavigationBar: NavigationBar(
         currentIndex: _currentIndexTab,
