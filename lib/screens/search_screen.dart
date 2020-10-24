@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 import 'package:way/blocs/blocs.dart';
 import 'package:way/blocs/navigation/navigation_bloc.dart';
 import 'package:way/blocs/navigation/navigation_event.dart';
@@ -16,14 +17,37 @@ class _SearchScreenState extends State<SearchScreen> {
   bool _autoValidate = false;
   String _from = '';
   String _to = '';
-  String _date = '';
-  String _time = '';
+  DateTime _date;
+  TimeOfDay _time;
   int _seats = 0;
   bool _onlyTwo = false;
 
   @override
   void initState() {
     super.initState();
+  }
+
+  Future<Null> _selectDate(BuildContext context) async {
+    final DateTime picked = await showDatePicker(
+        context: context,
+        initialDate: DateTime.now(),
+        firstDate: DateTime.now(),
+        lastDate: DateTime(2101));
+    if (picked != null && picked != _date) {
+      setState(() {
+        _date = picked;
+      });
+    }
+  }
+
+  Future<Null> _selectTime(BuildContext context) async {
+    final TimeOfDay picked =
+        await showTimePicker(context: context, initialTime: TimeOfDay.now());
+    if (picked != null && picked != _time) {
+      setState(() {
+        _time = picked;
+      });
+    }
   }
 
   @override
@@ -133,32 +157,35 @@ class _SearchScreenState extends State<SearchScreen> {
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            Icon(
-                              SearchIcons.calendar_outlilne,
-                              color: Color.fromRGBO(18, 97, 107, 1),
-                            ),
-                            Container(
-                              width: 250,
-                              child: TextFormField(
-                                  keyboardType: TextInputType.datetime,
-                                  validator: (value) {
-                                    if (value.isEmpty) {
-                                      return 'Please enter some text';
-                                    }
-                                    return null;
-                                  },
-                                  onSaved: (String val) {
-                                    _date = val;
-                                  },
-                                  decoration: InputDecoration(
-                                    hintText: 'Когда?',
-                                    hintStyle: TextStyle(
-                                        color: Color.fromRGBO(18, 97, 107, 1),
-                                        fontFamily: 'ComicSansMS',
-                                        fontSize: 16),
-                                  )),
-                              padding: EdgeInsets.only(left: 16),
-                            )
+                            Stack(overflow: Overflow.visible, children: [
+                              IconButton(
+                                iconSize: 20,
+                                padding: EdgeInsets.fromLTRB(0, 0, 22, 0),
+                                icon: Icon(
+                                  SearchIcons.calendar_outlilne,
+                                  color: Color.fromRGBO(18, 97, 107, 1),
+                                ),
+                                onPressed: () {
+                                  _selectDate(context);
+                                },
+                              ),
+                              Positioned(
+                                  child: Container(
+                                      width: 250,
+                                      child: Text(
+                                        _date != null
+                                            ? DateFormat('yyyy-MM-dd')
+                                                .format(_date)
+                                            : 'Когда?',
+                                        style: TextStyle(
+                                            color:
+                                                Color.fromRGBO(18, 97, 107, 1),
+                                            fontFamily: 'ComicSansMS',
+                                            fontSize: 16),
+                                      )),
+                                  left: 40,
+                                  top: 8)
+                            ])
                           ],
                         ),
                       ),
@@ -168,32 +195,34 @@ class _SearchScreenState extends State<SearchScreen> {
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            Icon(
-                              SearchIcons.clock,
-                              color: Color.fromRGBO(18, 97, 107, 1),
-                            ),
-                            Container(
-                              width: 250,
-                              child: TextFormField(
-                                  keyboardType: TextInputType.datetime,
-                                  validator: (value) {
-                                    if (value.isEmpty) {
-                                      return 'Please enter some text';
-                                    }
-                                    return null;
-                                  },
-                                  onSaved: (String val) {
-                                    _time = val;
-                                  },
-                                  decoration: InputDecoration(
-                                    hintText: 'Во сколько?',
-                                    hintStyle: TextStyle(
-                                        color: Color.fromRGBO(18, 97, 107, 1),
-                                        fontFamily: 'ComicSansMS',
-                                        fontSize: 16),
-                                  )),
-                              padding: EdgeInsets.only(left: 16),
-                            )
+                            Stack(overflow: Overflow.visible, children: [
+                              IconButton(
+                                iconSize: 20,
+                                padding: EdgeInsets.fromLTRB(0, 0, 22, 0),
+                                icon: Icon(
+                                  SearchIcons.clock,
+                                  color: Color.fromRGBO(18, 97, 107, 1),
+                                ),
+                                onPressed: () {
+                                  _selectTime(context);
+                                },
+                              ),
+                              Positioned(
+                                  child: Container(
+                                      width: 250,
+                                      child: Text(
+                                        _time != null
+                                            ? _time.format(context)
+                                            : 'Во сколько?',
+                                        style: TextStyle(
+                                            color:
+                                                Color.fromRGBO(18, 97, 107, 1),
+                                            fontFamily: 'ComicSansMS',
+                                            fontSize: 16),
+                                      )),
+                                  left: 40,
+                                  top: 8)
+                            ])
                           ],
                         ),
                       ),
@@ -257,7 +286,6 @@ class _SearchScreenState extends State<SearchScreen> {
                                     _onlyTwo = value;
                                   });
                                 },
-                                activeTrackColor: Colors.white,
                                 activeColor: Color.fromRGBO(18, 97, 107, 1),
                               ),
                             )
@@ -270,11 +298,13 @@ class _SearchScreenState extends State<SearchScreen> {
             FlatButton(
               onPressed: () {
                 if (_formKey.currentState.validate()) {
+                  final DateTime dateToServer = DateTime.utc(_date.year,
+                      _date.month, _date.day, _time.hour, _time.minute);
                   SearchTrip searchTrip = SearchTrip(
                       from: _from,
                       to: _to,
                       seats: _seats,
-                      dateTime: '${_date}T${_time}Z',
+                      dateTime: dateToServer.toIso8601String(),
                       onlyTwo: _onlyTwo);
                   BlocProvider.of<TripBloc>(context)
                       .add(TripSearchRequested(searchTrip: searchTrip));
