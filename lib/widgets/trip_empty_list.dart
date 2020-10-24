@@ -3,13 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:way/utils/constants.dart';
 
 class TripEmptyList extends StatelessWidget {
-  static TextStyle textStyleBaseTheme = TextStyle(
-    fontFamily: 'ComicSansMS',
-    fontSize: 30,
-    color: Constants.greyColor,
-  );
-
   String text;
+
   TripEmptyList(String text) {
     this.text = text;
   }
@@ -17,31 +12,31 @@ class TripEmptyList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            "На данный момент",
-            style: textStyleBaseTheme,
-          ),
-          Text(
-            "у Вас нет ${this.text}",
-            style: textStyleBaseTheme,
-          ),
-          Text(
-            "бронирований",
-            style: textStyleBaseTheme,
-          ),
-          Padding(
-            padding: EdgeInsets.only(top: 42),
-            child: Image.asset(
-              'assets/images/booking.jpg',
-              width: 341,
-              height: 400,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              "На данный момент",
+              style: Constants.textStyle30,
             ),
-          )
-        ],
-      ),
+            Text(
+              "у Вас нет ${this.text}",
+              style: Constants.textStyle30,
+            ),
+            Text(
+              "бронирований",
+              style: Constants.textStyle30,
+            ),
+            Padding(
+              padding: EdgeInsets.only(top: 42),
+              child: Image.asset(
+                'assets/images/booking.jpg',
+                width: 341,
+                height: 400,
+              ),
+            )
+          ],
+        ),
     );
   }
 

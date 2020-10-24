@@ -10,7 +10,7 @@ abstract class NavigationState extends Equatable {
 class NavigationInitial extends NavigationState {}
 
 class NavigationSuccess extends NavigationState {
-  final String pathTo;
+  final int pathTo;
   NavigationSuccess({this.pathTo});
 }
 

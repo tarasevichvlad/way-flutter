@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:way/utils/constants.dart';
 import 'navigation_icons.dart';
 import 'routes.dart';
 
@@ -25,6 +26,7 @@ class NavigationBar extends StatelessWidget {
   NavigationBar({this.currentIndex, this.onSelectTab});
   final int currentIndex;
   final ValueChanged<int> onSelectTab;
+
   @override
   BottomNavigationBar build(BuildContext context) {
     return BottomNavigationBar(
@@ -32,21 +34,22 @@ class NavigationBar extends StatelessWidget {
       showSelectedLabels: false,
       showUnselectedLabels: false,
       currentIndex: currentIndex,
-      selectedItemColor: Colors.white,
-      unselectedItemColor: Colors.grey,
+      selectedItemColor: Constants.whiteColor,
+      unselectedItemColor: Constants.greyColor,
+      backgroundColor: Constants.baseColor,
       onTap: (value) {
         onSelectTab(value);
       },
       items: tabInfo.values
-          .toList()
           .map((item) => _buildItem(barItem: item))
-          .toList(),
-      backgroundColor: Color.fromRGBO(18, 97, 106, 1),
+          .toList()
     );
   }
 
   BottomNavigationBarItem _buildItem({BarItem barItem}) {
     return BottomNavigationBarItem(
-        icon: Icon(barItem.iconData), title: Text(barItem.text));
+        icon: Icon(barItem.iconData),
+        title: Text(barItem.text)
+    );
   }
 }

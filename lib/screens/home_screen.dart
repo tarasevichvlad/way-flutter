@@ -31,15 +31,15 @@ class _HomePageState extends State<HomeScreen> {
         create: (context) => NavigationBloc(NavigationInitial()),
         child: SafeArea(
             child: BlocListener<NavigationBloc, NavigationState>(
-          listener: (BuildContext context, NavigationState state) {
-            if (state is NavigationSuccess) {
-              // TODO: map string to component
-            }
-          },
-          child: IndexedStack(
-            index: _currentIndexPage,
-            children: routes,
-          ),
+              listener: (BuildContext context, NavigationState state) {
+                if (state is NavigationSuccess) {
+                  onPageChanged(state.pathTo);
+                }
+              },
+              child: IndexedStack(
+                index: _currentIndexPage,
+                children: routes,
+              ),
         )),
       ),
       bottomNavigationBar: NavigationBar(

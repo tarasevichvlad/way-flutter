@@ -19,11 +19,11 @@ class _BookingScreenState extends State<BookingScreen> {
     return DefaultTabController(
       length: 2,
       child: Scaffold(
+        backgroundColor: Constants.whiteColor,
         appBar: TabBar(
-          indicatorColor: Colors.amber,
-          labelColor: Constants.whiteColor,
           unselectedLabelColor: Constants.baseColor,
-          indicator: BoxDecoration(color: Constants.baseColor),
+          indicator: BoxDecoration(color: Constants.baseColor,),
+          indicatorColor: Constants.baseColor,
           tabs: [
             Tab(text: "Активные"),
             Tab(text: "Завершенные")

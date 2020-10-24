@@ -2,6 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:way/blocs/navigation/navigation_bloc.dart';
+import 'package:way/blocs/navigation/navigation_event.dart';
+import 'package:way/blocs/navigation/navigation_state.dart';
 import 'package:way/blocs/user/user_bloc.dart';
 import 'package:way/blocs/user/user_event.dart';
 import 'package:way/blocs/user/user_state.dart';
@@ -27,11 +30,13 @@ class _AccountState extends State<Account> {
       color: const Color(0xff12616a));
 
   UserBloc _userBloc;
+  NavigationBloc _navigationBloc;
 
   @override
   void initState() {
     super.initState();
     _userBloc = BlocProvider.of<UserBloc>(context);
+    _navigationBloc = BlocProvider.of<NavigationBloc>(context);
   }
 
   @override
@@ -127,6 +132,7 @@ class _AccountState extends State<Account> {
                           children: [
                             GestureDetector(
                               onTap: () {
+                                _navigationBloc.add(NavigationToTrips());
                                 print("The place for navigate to trips");
                               },
                               child: Column(children: [

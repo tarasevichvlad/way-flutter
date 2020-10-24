@@ -10,7 +10,11 @@ class NavigationBloc extends Bloc<NavigationEvent, NavigationState> {
   @override
   Stream<NavigationState> mapEventToState(NavigationEvent event) async* {
     try {
-      if (event is NavgationStart) {
+      if (event is NavigationStart) {
+        yield NavigationSuccess(pathTo: event.pathTo);
+      }
+
+      if (event is NavigationToTrips) {
         yield NavigationSuccess(pathTo: event.pathTo);
       }
     } catch (_) {
