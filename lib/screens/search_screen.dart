@@ -28,6 +28,7 @@ class _SearchScreenState extends State<SearchScreen> {
 
   @override
   Widget build(BuildContext context) {
+    // TODO: block builder
     return BlocListener<TripBloc, TripState>(
       listener: (BuildContext context, TripState state) {
         if (state is TripSearchSuccess) {
@@ -242,19 +243,23 @@ class _SearchScreenState extends State<SearchScreen> {
                             ),
                             Container(
                               width: 250,
-                              child: TextFormField(
-                                  keyboardType: TextInputType.text,
-                                  onSaved: (String val) {
-                                    _onlyTwo = false;
-                                  },
-                                  decoration: InputDecoration(
-                                    hintText: 'Сзади только двое?',
-                                    hintStyle: TextStyle(
-                                        color: Color.fromRGBO(18, 97, 107, 1),
-                                        fontFamily: 'ComicSansMS',
-                                        fontSize: 16),
-                                  )),
-                              padding: EdgeInsets.only(left: 16),
+                              child: SwitchListTile(
+                                title: Text(
+                                  'Сзади только двое?',
+                                  style: TextStyle(
+                                      color: Color.fromRGBO(18, 97, 107, 1),
+                                      fontFamily: 'ComicSansMS',
+                                      fontSize: 16),
+                                ),
+                                value: _onlyTwo,
+                                onChanged: (value) {
+                                  setState(() {
+                                    _onlyTwo = value;
+                                  });
+                                },
+                                activeTrackColor: Colors.white,
+                                activeColor: Color.fromRGBO(18, 97, 107, 1),
+                              ),
                             )
                           ],
                         ),
