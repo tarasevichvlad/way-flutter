@@ -2,7 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:way/models/review.dart';
 import 'car.dart';
 
-class User extends Equatable{
+class User extends Equatable {
   String id;
   String firstName;
   String lastName;
@@ -12,23 +12,31 @@ class User extends Equatable{
   int tripCount;
   List<Review> reviews;
 
-  User();
   @override
   List<Object> get props => [id, firstName, lastName, phone, car, rating];
+
+  User(
+      {this.id,
+      this.firstName,
+      this.lastName,
+      this.phone,
+      this.car,
+      this.rating,
+      this.tripCount,
+      this.reviews});
 
   User.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     firstName = json['firstName'];
     lastName = json['lastName'];
     phone = json['phone'];
-    rating =  double.parse(json['rating'].toStringAsExponential(1));
+    rating = double.parse(json['rating'].toStringAsExponential(1));
     if (json['car'] != null) {
       car = Car.fromJson(json['car']);
     }
   }
 
-  String getFullName()
-  {
+  String getFullName() {
     return '${this.firstName} ${this.lastName}';
   }
 

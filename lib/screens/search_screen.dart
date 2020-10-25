@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:way/blocs/blocs.dart';
@@ -6,6 +7,7 @@ import 'package:way/blocs/navigation/navigation_bloc.dart';
 import 'package:way/blocs/navigation/navigation_event.dart';
 import 'package:way/models/search_trip.dart';
 import 'package:way/search_icons.dart';
+import 'package:way/routes.dart';
 
 class SearchScreen extends StatefulWidget {
   @override
@@ -52,13 +54,13 @@ class _SearchScreenState extends State<SearchScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: block builder
     return BlocListener<TripBloc, TripState>(
       listener: (BuildContext context, TripState state) {
         if (state is TripSearchSuccess) {
-          // TODO: navigate to new page
-          //BlocProvider.of<NavigationBloc>(context)
-          //.add(NavgationStart(pathTo: 'test'));
+          BlocProvider.of<NavigationBloc>(context).add(NavigationToSearchTrip(
+              pathTo: NestedRoutes.searchListTrip,
+              trips: state.trips,
+              searchTrips: state.searchTrip));
         }
       },
       child: Container(
@@ -246,8 +248,11 @@ class _SearchScreenState extends State<SearchScreen> {
                                     }
                                     return null;
                                   },
+                                  inputFormatters: [
+                                    FilteringTextInputFormatter.digitsOnly
+                                  ],
                                   onSaved: (String val) {
-                                    _seats = 2;
+                                    _seats = int.tryParse(val, radix: 10);
                                   },
                                   decoration: InputDecoration(
                                     hintText: 'Сколько нужно мест?',
@@ -298,6 +303,7 @@ class _SearchScreenState extends State<SearchScreen> {
             FlatButton(
               onPressed: () {
                 if (_formKey.currentState.validate()) {
+                  _formKey.currentState.save();
                   final DateTime dateToServer = DateTime.utc(_date.year,
                       _date.month, _date.day, _time.hour, _time.minute);
                   SearchTrip searchTrip = SearchTrip(
@@ -308,7 +314,6 @@ class _SearchScreenState extends State<SearchScreen> {
                       onlyTwo: _onlyTwo);
                   BlocProvider.of<TripBloc>(context)
                       .add(TripSearchRequested(searchTrip: searchTrip));
-                  _formKey.currentState.save();
                 } else {
                   setState(() {
                     _autoValidate = true;

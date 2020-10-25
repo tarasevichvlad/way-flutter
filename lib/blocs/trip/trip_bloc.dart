@@ -31,10 +31,15 @@ class TripBloc extends Bloc<TripEvent, TripState> {
       if (event is TripSearchRequested) {
         try {
           final trips = await tripRepository.searchTrips(event.searchTrip);
-          yield TripSearchSuccess(trips: trips);
+          yield TripSearchSuccess(trips: trips, searchTrip: event.searchTrip);
         } catch (_) {
           yield TripSearchFailure();
         }
+      }
+
+      if (event is TripInitialSearch) {
+        yield TripInitialSearchSuccess(
+            trips: event.trips, searchTrip: event.searchTrip);
       }
     } catch (_) {
       yield TripFailure();

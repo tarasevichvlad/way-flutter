@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:way/models/search_trip.dart';
 import 'package:way/models/trip.dart';
 
 abstract class TripState extends Equatable {
@@ -16,7 +17,7 @@ class TripSuccess extends TripState {
   List<Trip> trips;
 
   TripSuccess({this.trips}) {
-   trips =  this.trips ?? List<Trip>();
+    trips = this.trips ?? List<Trip>();
   }
 
   TripSuccess copyWith({List<Trip> trips, bool hasReachedMax}) {
@@ -36,11 +37,24 @@ class TripSearch extends TripState {}
 
 class TripSearchSuccess extends TripState {
   final List<Trip> trips;
+  final SearchTrip searchTrip;
 
-  const TripSearchSuccess({this.trips});
+  const TripSearchSuccess({this.trips, this.searchTrip});
 
   @override
   List<Object> get props => [trips];
 }
 
 class TripSearchFailure extends TripState {}
+
+class TripInitialSearchSuccess extends TripState {
+  List<Trip> trips;
+  final SearchTrip searchTrip;
+
+  TripInitialSearchSuccess({this.trips, this.searchTrip}) {
+    trips = this.trips ?? List<Trip>();
+  }
+
+  @override
+  List<Object> get props => [trips];
+}

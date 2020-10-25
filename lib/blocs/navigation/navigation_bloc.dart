@@ -13,6 +13,13 @@ class NavigationBloc extends Bloc<NavigationEvent, NavigationState> {
       if (event is NavgationStart) {
         yield NavigationSuccess(pathTo: event.pathTo);
       }
+
+      if (event is NavigationToSearchTrip) {
+        yield NavigationToSearchTripSuccess(
+            pathTo: event.pathTo,
+            trips: event.trips,
+            searchTrip: event.searchTrips);
+      }
     } catch (_) {
       yield NavigationFailure();
     }
