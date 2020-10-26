@@ -62,8 +62,12 @@ class TripProvider {
         },
         body: json.encode(data));
     if (response.statusCode == 200) {
-      final List<dynamic> tripJson = json.decode(response.body);
-      return tripJson.map((json) => Trip.fromJson(json)).toList();
+      try {
+        final List<dynamic> tripJson = json.decode(response.body);
+        return tripJson.map((json) => Trip.fromJson(json)).toList();
+      } catch (e) {
+        throw Exception('Error search trips');
+      }
     } else {
       throw Exception('Error search trips');
     }
