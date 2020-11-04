@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:intl/intl.dart';
 import 'package:way/blocs/blocs.dart';
 import 'package:way/blocs/navigation/navigation_bloc.dart';
 import 'package:way/blocs/navigation/navigation_event.dart';
 import 'package:way/models/search_trip.dart';
-import 'package:way/search_icons.dart';
 import 'package:way/routes.dart';
+import 'package:way/widgets/search_form.dart';
 
 class SearchScreen extends StatefulWidget {
   @override
@@ -16,44 +14,19 @@ class SearchScreen extends StatefulWidget {
 
 class _SearchScreenState extends State<SearchScreen> {
   final _formKey = GlobalKey<FormState>();
-  bool _autoValidate = false;
-  String _from = '';
-  String _to = '';
-  DateTime _date;
-  TimeOfDay _time;
-  int _seats = 0;
-  bool _onlyTwo = false;
-
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  Future<Null> _selectDate(BuildContext context) async {
-    final DateTime picked = await showDatePicker(
-        context: context,
-        initialDate: DateTime.now(),
-        firstDate: DateTime.now(),
-        lastDate: DateTime(2101));
-    if (picked != null && picked != _date) {
-      setState(() {
-        _date = picked;
-      });
-    }
-  }
-
-  Future<Null> _selectTime(BuildContext context) async {
-    final TimeOfDay picked =
-        await showTimePicker(context: context, initialTime: TimeOfDay.now());
-    if (picked != null && picked != _time) {
-      setState(() {
-        _time = picked;
-      });
-    }
-  }
+  TripModel model;
+  bool autoValidate = false;
 
   @override
   Widget build(BuildContext context) {
+    final form = SearchForm(
+      autovalidate: autoValidate, // TODO: invstigate
+      formKey: _formKey,
+      onSaved: (TripModel data) {
+        model = data;
+      },
+    );
+    form.autovalidate = autoValidate;
     return BlocListener<TripBloc, TripState>(
       listener: (BuildContext context, TripState state) {
         if (state is TripSearchSuccess) {
@@ -73,250 +46,33 @@ class _SearchScreenState extends State<SearchScreen> {
               child: Image.asset('assets/images/find.png'),
             ),
             Container(
-              decoration: BoxDecoration(
-                  color: Color.fromRGBO(245, 245, 245, 1),
-                  borderRadius: BorderRadius.all(Radius.circular(18))),
-              padding: EdgeInsets.all(30),
-              margin: EdgeInsets.all(24),
-              child: Form(
-                  key: _formKey,
-                  autovalidate: _autoValidate,
-                  child: Column(
-                    children: [
-                      Container(
-                        height: 48,
-                        padding: EdgeInsets.only(bottom: 8),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Icon(
-                              SearchIcons.location,
-                              color: Color.fromRGBO(18, 97, 107, 1),
-                            ),
-                            Container(
-                              width: 250,
-                              child: TextFormField(
-                                  keyboardType: TextInputType.text,
-                                  validator: (value) {
-                                    if (value.isEmpty) {
-                                      return 'Please enter some text';
-                                    }
-                                    return null;
-                                  },
-                                  onSaved: (String val) {
-                                    _from = val;
-                                  },
-                                  decoration: InputDecoration(
-                                    hintText: 'Откуда?',
-                                    hintStyle: TextStyle(
-                                        color: Color.fromRGBO(18, 97, 107, 1),
-                                        fontFamily: 'ComicSansMS',
-                                        fontSize: 16),
-                                  )),
-                              padding: EdgeInsets.only(left: 16),
-                            )
-                          ],
-                        ),
-                      ),
-                      Container(
-                        height: 48,
-                        padding: EdgeInsets.only(bottom: 8),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Icon(
-                              SearchIcons.location,
-                              color: Color.fromRGBO(18, 97, 107, 1),
-                            ),
-                            Container(
-                              width: 250,
-                              child: TextFormField(
-                                  keyboardType: TextInputType.text,
-                                  validator: (value) {
-                                    if (value.isEmpty) {
-                                      return 'Please enter some text';
-                                    }
-                                    return null;
-                                  },
-                                  onSaved: (String val) {
-                                    _to = val;
-                                  },
-                                  decoration: InputDecoration(
-                                    hintText: 'Куда?',
-                                    hintStyle: TextStyle(
-                                        color: Color.fromRGBO(18, 97, 107, 1),
-                                        fontFamily: 'ComicSansMS',
-                                        fontSize: 16),
-                                  )),
-                              padding: EdgeInsets.only(left: 16),
-                            )
-                          ],
-                        ),
-                      ),
-                      Container(
-                        height: 48,
-                        padding: EdgeInsets.only(bottom: 8),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Stack(overflow: Overflow.visible, children: [
-                              IconButton(
-                                iconSize: 20,
-                                padding: EdgeInsets.fromLTRB(0, 0, 22, 0),
-                                icon: Icon(
-                                  SearchIcons.calendar_outlilne,
-                                  color: Color.fromRGBO(18, 97, 107, 1),
-                                ),
-                                onPressed: () {
-                                  _selectDate(context);
-                                },
-                              ),
-                              Positioned(
-                                  child: Container(
-                                      width: 250,
-                                      child: Text(
-                                        _date != null
-                                            ? DateFormat('yyyy-MM-dd')
-                                                .format(_date)
-                                            : 'Когда?',
-                                        style: TextStyle(
-                                            color:
-                                                Color.fromRGBO(18, 97, 107, 1),
-                                            fontFamily: 'ComicSansMS',
-                                            fontSize: 16),
-                                      )),
-                                  left: 40,
-                                  top: 8)
-                            ])
-                          ],
-                        ),
-                      ),
-                      Container(
-                        height: 48,
-                        padding: EdgeInsets.only(bottom: 8),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Stack(overflow: Overflow.visible, children: [
-                              IconButton(
-                                iconSize: 20,
-                                padding: EdgeInsets.fromLTRB(0, 0, 22, 0),
-                                icon: Icon(
-                                  SearchIcons.clock,
-                                  color: Color.fromRGBO(18, 97, 107, 1),
-                                ),
-                                onPressed: () {
-                                  _selectTime(context);
-                                },
-                              ),
-                              Positioned(
-                                  child: Container(
-                                      width: 250,
-                                      child: Text(
-                                        _time != null
-                                            ? _time.format(context)
-                                            : 'Во сколько?',
-                                        style: TextStyle(
-                                            color:
-                                                Color.fromRGBO(18, 97, 107, 1),
-                                            fontFamily: 'ComicSansMS',
-                                            fontSize: 16),
-                                      )),
-                                  left: 40,
-                                  top: 8)
-                            ])
-                          ],
-                        ),
-                      ),
-                      Container(
-                        height: 48,
-                        padding: EdgeInsets.only(bottom: 8),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Icon(
-                              SearchIcons.airline_seat_recline_normal,
-                              color: Color.fromRGBO(18, 97, 107, 1),
-                            ),
-                            Container(
-                              width: 250,
-                              child: TextFormField(
-                                  keyboardType: TextInputType.number,
-                                  validator: (value) {
-                                    if (value.isEmpty) {
-                                      return 'Please enter some text';
-                                    }
-                                    return null;
-                                  },
-                                  inputFormatters: [
-                                    FilteringTextInputFormatter.digitsOnly
-                                  ],
-                                  onSaved: (String val) {
-                                    _seats = int.tryParse(val, radix: 10);
-                                  },
-                                  decoration: InputDecoration(
-                                    hintText: 'Сколько нужно мест?',
-                                    hintStyle: TextStyle(
-                                        color: Color.fromRGBO(18, 97, 107, 1),
-                                        fontFamily: 'ComicSansMS',
-                                        fontSize: 16),
-                                  )),
-                              padding: EdgeInsets.only(left: 16),
-                            )
-                          ],
-                        ),
-                      ),
-                      Container(
-                        height: 48,
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Icon(
-                              SearchIcons.users,
-                              color: Color.fromRGBO(18, 97, 107, 1),
-                            ),
-                            Container(
-                              width: 250,
-                              child: SwitchListTile(
-                                title: Text(
-                                  'Сзади только двое?',
-                                  style: TextStyle(
-                                      color: Color.fromRGBO(18, 97, 107, 1),
-                                      fontFamily: 'ComicSansMS',
-                                      fontSize: 16),
-                                ),
-                                value: _onlyTwo,
-                                onChanged: (value) {
-                                  setState(() {
-                                    _onlyTwo = value;
-                                  });
-                                },
-                                activeColor: Color.fromRGBO(18, 97, 107, 1),
-                              ),
-                            )
-                          ],
-                        ),
-                      )
-                    ],
-                  )),
-            ),
+                decoration: BoxDecoration(
+                    color: Color.fromRGBO(245, 245, 245, 1),
+                    borderRadius: BorderRadius.all(Radius.circular(18))),
+                padding: EdgeInsets.all(30),
+                margin: EdgeInsets.all(24),
+                child: form),
             FlatButton(
               onPressed: () {
                 if (_formKey.currentState.validate()) {
                   _formKey.currentState.save();
-                  final DateTime dateToServer = DateTime.utc(_date.year,
-                      _date.month, _date.day, _time.hour, _time.minute);
+                  final DateTime dateToServer = DateTime.utc(
+                      model.date.year,
+                      model.date.month,
+                      model.date.day,
+                      model.time.hour,
+                      model.time.minute);
                   SearchTrip searchTrip = SearchTrip(
-                      from: _from,
-                      to: _to,
-                      seats: _seats,
+                      from: model.from,
+                      to: model.to,
+                      seats: model.seats,
                       dateTime: dateToServer.toIso8601String(),
-                      onlyTwo: _onlyTwo);
+                      onlyTwo: model.onlyTwo);
                   BlocProvider.of<TripBloc>(context)
                       .add(TripSearchRequested(searchTrip: searchTrip));
                 } else {
                   setState(() {
-                    _autoValidate = true;
+                    autoValidate = true;
                   });
                 }
               },
