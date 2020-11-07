@@ -31,7 +31,9 @@ Map<String, Widget> _routes = {
   TabNavigatorRoutes.search: BlocProvider(
       create: (context) => TripBloc(TripRepository(), TripInitial()),
       child: SearchScreen()),
-  TabNavigatorRoutes.createTrip: CreateTripScreen(),
+  TabNavigatorRoutes.createTrip: BlocProvider(
+      create: (context) => TripBloc(TripRepository(), TripInitial()),
+      child: CreateTripScreen()),
   TabNavigatorRoutes.myMessage: MyMessageScreen(),
   TabNavigatorRoutes.myAccount: MyAccountScreen(),
   NestedRoutes.searchListTrip: SearchListTripScreen()

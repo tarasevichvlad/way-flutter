@@ -45,3 +45,7 @@ class TripInitialSearchSuccess extends TripState {
     trips = this.trips ?? List<Trip>();
   }
 }
+
+class TripCreateSuccess extends TripState {}
+
+class TripCreateFailure extends TripState {}

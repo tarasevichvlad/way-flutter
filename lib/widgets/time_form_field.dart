@@ -14,7 +14,8 @@ class TimeFormField extends FormField<TimeOfDay> {
       {FormFieldSetter<TimeOfDay> onSaved,
       FormFieldValidator<TimeOfDay> validator,
       TimeOfDay initialValue,
-      bool autovalidate = false})
+      bool autovalidate = false,
+      String label = 'Во сколько?'})
       : super(
             onSaved: onSaved,
             validator: validator,
@@ -47,7 +48,7 @@ class TimeFormField extends FormField<TimeOfDay> {
                             : Text(
                                 state.value != null
                                     ? state.value.format(state.context)
-                                    : 'Во сколько?',
+                                    : label,
                                 style: TextStyle(
                                     color: Color.fromRGBO(18, 97, 107, 1),
                                     fontFamily: 'ComicSansMS',

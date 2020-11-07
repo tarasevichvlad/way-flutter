@@ -1,3 +1,4 @@
+import 'package:way/models/create_trip.dart';
 import 'package:way/models/search_trip.dart';
 import 'trip_api_provider.dart';
 import '../../models/trip.dart';
@@ -10,4 +11,5 @@ class TripRepository {
   Future<List<Trip>> getMyTrips() => _tripProvider.getMyTrips();
   Future<List<Trip>> searchTrips(SearchTrip data) =>
       _tripProvider.searchTrip(data);
+  Future<Null> createTrip(CreateTrip data) => _tripProvider.createTrip(data);
 }

@@ -18,7 +18,8 @@ class DateFormField extends FormField<DateTime> {
       {FormFieldSetter<DateTime> onSaved,
       FormFieldValidator<DateTime> validator,
       DateTime initialValue,
-      bool autovalidate = false})
+      bool autovalidate = false,
+      String label = 'Когда?'})
       : super(
             onSaved: onSaved,
             validator: validator,
@@ -52,7 +53,7 @@ class DateFormField extends FormField<DateTime> {
                                 state.value != null
                                     ? DateFormat('yyyy-MM-dd')
                                         .format(state.value)
-                                    : 'Когда?',
+                                    : label,
                                 style: TextStyle(
                                     color: Color.fromRGBO(18, 97, 107, 1),
                                     fontFamily: 'ComicSansMS',

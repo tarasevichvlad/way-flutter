@@ -11,6 +11,10 @@ class TripModel {
   TimeOfDay time;
   int seats;
   bool onlyTwo;
+  String comment;
+  double price;
+  DateTime dateArrive;
+  TimeOfDay timeArrive;
   TripModel(
       {this.date,
       this.time,
@@ -24,25 +28,43 @@ class SearchForm extends StatefulWidget {
   GlobalKey<FormState> formKey;
   Function onSaved;
   bool autovalidate;
+  List<Widget> children;
+  bool isCreateMode = false;
   @override
   State<StatefulWidget> createState() => _SearchFormState(
-      formKey: formKey, onSaved: onSaved, autovalidate: autovalidate);
+      formKey: formKey,
+      onSaved: onSaved,
+      autovalidate: autovalidate,
+      children: children,
+      isCreateMode: isCreateMode);
 
-  SearchForm({this.formKey, this.onSaved, this.autovalidate});
+  SearchForm(
+      {this.formKey,
+      this.onSaved,
+      this.autovalidate,
+      this.children,
+      this.isCreateMode});
 }
 
 class _SearchFormState extends State<SearchForm> {
-  List<Widget> children = [];
+  List<Widget> children;
   GlobalKey<FormState> formKey;
   bool autovalidate;
   TripModel model = TripModel();
   Function onSaved;
+  bool isCreateMode = false;
   TextStyle _defaultTextStyle = TextStyle(
       color: Color.fromRGBO(18, 97, 107, 1),
       fontFamily: 'ComicSansMS',
       fontSize: 16);
 
-  _SearchFormState({this.formKey, this.onSaved, this.autovalidate});
+  _SearchFormState(
+      {this.formKey,
+      this.onSaved,
+      this.autovalidate,
+      this.isCreateMode,
+      List<Widget> children = const []})
+      : this.children = children;
 
   String _requiredValidator(String value) {
     if (value.isEmpty) {
@@ -53,6 +75,84 @@ class _SearchFormState extends State<SearchForm> {
 
   @override
   Widget build(BuildContext context) {
+    List<Widget> createModeWidget = isCreateMode
+        ? [
+            Container(
+              height: 48,
+              padding: EdgeInsets.only(bottom: 8),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  DateFormField(
+                    onSaved: (DateTime date) {
+                      model.dateArrive = date;
+                      onSaved(model);
+                    },
+                    validator: (DateTime value) {
+                      if (value == null) {
+                        return 'Please enter some text';
+                      }
+                      return null;
+                    },
+                    initialValue: model.dateArrive,
+                    label: 'Дата приезда?',
+                  )
+                ],
+              ),
+            ),
+            Container(
+              height: 48,
+              padding: EdgeInsets.only(bottom: 8),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  TimeFormField(
+                    onSaved: (TimeOfDay time) {
+                      model.timeArrive = time;
+                      onSaved(model);
+                    },
+                    validator: (TimeOfDay value) {
+                      if (value == null) {
+                        return 'Please enter some text';
+                      }
+                      return null;
+                    },
+                    initialValue: model.timeArrive,
+                    label: 'Время приезда?',
+                  )
+                ],
+              ),
+            ),
+            Container(
+              height: 48,
+              padding: EdgeInsets.only(bottom: 8),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Icon(
+                    Icons.local_offer,
+                    color: Color.fromRGBO(18, 97, 107, 1),
+                  ),
+                  Container(
+                    width: 250,
+                    child: TextFormField(
+                        keyboardType: TextInputType.number,
+                        validator: _requiredValidator,
+                        onSaved: (String val) {
+                          model.price = double.parse(val);
+                          onSaved(model);
+                        },
+                        decoration: InputDecoration(
+                            hintText: 'За сколько?',
+                            hintStyle: _defaultTextStyle,
+                            errorStyle: TextStyle(color: Colors.red))),
+                    padding: EdgeInsets.only(left: 16),
+                  )
+                ],
+              ),
+            )
+          ]
+        : [SizedBox()];
     List<Widget> textFields = [
       Container(
         height: 48,
@@ -154,6 +254,7 @@ class _SearchFormState extends State<SearchForm> {
           ],
         ),
       ),
+      ...createModeWidget,
       Container(
         height: 48,
         padding: EdgeInsets.only(bottom: 8),
@@ -213,7 +314,7 @@ class _SearchFormState extends State<SearchForm> {
         ),
       )
     ];
-    textFields.addAll(children);
+    textFields.addAll(children ?? []);
     return Container(
       child: Form(
           key: formKey,

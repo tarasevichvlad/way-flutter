@@ -22,6 +22,7 @@ class _SearchScreenState extends State<SearchScreen> {
     final form = SearchForm(
       autovalidate: autoValidate, // TODO: invstigate
       formKey: _formKey,
+      isCreateMode: false,
       onSaved: (TripModel data) {
         model = data;
       },

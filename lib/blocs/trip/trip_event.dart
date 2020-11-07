@@ -1,3 +1,4 @@
+import 'package:way/models/create_trip.dart';
 import 'package:way/models/search_trip.dart';
 import 'package:way/models/trip.dart';
 
@@ -19,4 +20,10 @@ class TripInitialSearch extends TripEvent {
   final List<Trip> trips;
   final SearchTrip searchTrip;
   TripInitialSearch({this.trips, this.searchTrip});
+}
+
+class TripCreateRequested extends TripEvent {
+  final CreateTrip createTrip;
+
+  TripCreateRequested({this.createTrip}) : assert(createTrip != null);
 }

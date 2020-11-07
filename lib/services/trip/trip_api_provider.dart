@@ -1,4 +1,5 @@
 import 'package:http/http.dart' as http;
+import 'package:way/models/create_trip.dart';
 import 'package:way/models/search_trip.dart';
 import '../../models/trip.dart';
 import '../../utils/constants.dart';
@@ -70,6 +71,25 @@ class TripProvider {
       }
     } else {
       throw Exception('Error search trips');
+    }
+  }
+
+  Future<Null> createTrip(CreateTrip data) async {
+    final token = await auth.getToken();
+    final response = await http.post(Constants.getBaseUrl() + '/trips',
+        headers: {
+          'Authorization': "Bearer " + token,
+          'Content-Type': 'application/json'
+        },
+        body: json.encode(data));
+    if (response.statusCode == 200) {
+      try {
+        return null;
+      } catch (e) {
+        throw Exception('Error create trip');
+      }
+    } else {
+      throw Exception('Error create trip');
     }
   }
 }
