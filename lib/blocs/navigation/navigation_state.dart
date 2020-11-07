@@ -21,3 +21,9 @@ class NavigationToSearchTripSuccess extends NavigationState {
   final SearchTrip searchTrip;
   NavigationToSearchTripSuccess({this.pathTo, this.trips, this.searchTrip});
 }
+
+class NavigationToBookingTripSuccess extends NavigationState {
+  final String tripId;
+  final String pathTo;
+  NavigationToBookingTripSuccess({this.pathTo, this.tripId});
+}

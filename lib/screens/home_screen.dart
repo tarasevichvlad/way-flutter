@@ -41,6 +41,11 @@ class _HomePageState extends State<HomeScreen> {
               int navigationIndex = _findNavigationIndex(state.pathTo);
               navigateToIndexStack(navigationIndex);
             }
+
+            if (state is NavigationToBookingTripSuccess) {
+              int navigationIndex = _findNavigationIndex(state.pathTo);
+              navigateToIndexStack(navigationIndex);
+            }
           },
           child: IndexedStack(
             index: _currentIndexPage,

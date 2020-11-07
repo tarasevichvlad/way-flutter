@@ -49,3 +49,9 @@ class TripInitialSearchSuccess extends TripState {
 class TripCreateSuccess extends TripState {}
 
 class TripCreateFailure extends TripState {}
+
+class TripInitialInfoSuccess extends TripState {
+  String tripId;
+
+  TripInitialInfoSuccess({this.tripId});
+}

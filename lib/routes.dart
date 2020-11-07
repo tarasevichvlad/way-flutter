@@ -1,5 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:way/screens/search_list_trip_screen.dart';
+import 'package:way/screens/search_trip_info_screen.dart';
+import 'package:way/screens/success_booking_screen.dart';
 import 'package:way/services/trip/trip_repository.dart';
 
 import 'blocs/trip/trip_bloc.dart';
@@ -23,6 +25,8 @@ class TabNavigatorRoutes {
 
 class NestedRoutes {
   static const String searchListTrip = '/search-list-trip';
+  static const String searchTripInfo = '/search-trip-info';
+  static const String searchTripSuccessBooking = '/search-trip-success-booking';
 }
 
 Map<String, Widget> _routes = {
@@ -36,7 +40,9 @@ Map<String, Widget> _routes = {
       child: CreateTripScreen()),
   TabNavigatorRoutes.myMessage: MyMessageScreen(),
   TabNavigatorRoutes.myAccount: MyAccountScreen(),
-  NestedRoutes.searchListTrip: SearchListTripScreen()
+  NestedRoutes.searchListTrip: SearchListTripScreen(),
+  NestedRoutes.searchTripInfo: SearchTripInfoScreen(),
+  NestedRoutes.searchTripSuccessBooking: SuccessBookingScreen()
 };
 
 List<Widget> routes = _routes.values.toList();

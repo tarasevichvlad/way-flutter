@@ -20,6 +20,11 @@ class NavigationBloc extends Bloc<NavigationEvent, NavigationState> {
             trips: event.trips,
             searchTrip: event.searchTrips);
       }
+
+      if (event is NavigationToBookingTrip) {
+        yield NavigationToBookingTripSuccess(
+            pathTo: event.pathTo, tripId: event.tripId);
+      }
     } catch (_) {
       yield NavigationFailure();
     }

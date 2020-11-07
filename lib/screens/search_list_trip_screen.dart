@@ -102,7 +102,14 @@ class _SearchListTripScreen extends State<SearchListTripScreen> {
                       physics: const AlwaysScrollableScrollPhysics(),
                       itemBuilder: (BuildContext context, int index) {
                         return index < state.trips.length
-                            ? TripCard(trip: state.trips[index])
+                            ? GestureDetector(
+                                child: TripCard(trip: state.trips[index]),
+                                onTap: () {
+                                  BlocProvider.of<NavigationBloc>(context).add(
+                                      NavigationToBookingTrip(
+                                          pathTo: NestedRoutes.searchTripInfo,
+                                          tripId: state.trips[index].id));
+                                })
                             : Text("");
                       },
                       padding: const EdgeInsets.only(left: 15, right: 15),

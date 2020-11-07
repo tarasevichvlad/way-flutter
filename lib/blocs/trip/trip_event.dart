@@ -27,3 +27,8 @@ class TripCreateRequested extends TripEvent {
 
   TripCreateRequested({this.createTrip}) : assert(createTrip != null);
 }
+
+class TripInitialInfo extends TripEvent {
+  final String tripId;
+  TripInitialInfo({this.tripId});
+}

@@ -22,3 +22,12 @@ class NavigationToSearchTrip extends NavigationEvent {
   @override
   List<Object> get props => [pathTo, trips, searchTrips];
 }
+
+class NavigationToBookingTrip extends NavigationEvent {
+  final String tripId;
+  final String pathTo;
+  NavigationToBookingTrip({this.pathTo, this.tripId});
+
+  @override
+  List<Object> get props => [pathTo, tripId];
+}
