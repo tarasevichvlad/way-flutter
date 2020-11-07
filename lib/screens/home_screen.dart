@@ -37,6 +37,11 @@ class _HomePageState extends State<HomeScreen> {
               navigateToIndexStack(navigationIndex);
             }
 
+            if (state is NavigationMainSuccess) {
+              int navigationIndex = _findNavigationIndex(state.pathTo);
+              navigateToMainIndexStack(navigationIndex);
+            }
+
             if (state is NavigationToSearchTripSuccess) {
               int navigationIndex = _findNavigationIndex(state.pathTo);
               navigateToIndexStack(navigationIndex);
@@ -81,6 +86,15 @@ class _HomePageState extends State<HomeScreen> {
     if (navigationIndex != null && navigationIndex != -1) {
       setState(() {
         _currentIndexPage = navigationIndex;
+      });
+    }
+  }
+
+  void navigateToMainIndexStack(int navigationIndex) {
+    if (navigationIndex != null && navigationIndex != -1) {
+      setState(() {
+        this._currentIndexTab = navigationIndex - 1;
+        this._currentIndexPage = navigationIndex;
       });
     }
   }

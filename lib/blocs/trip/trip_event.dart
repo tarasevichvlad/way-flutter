@@ -32,3 +32,8 @@ class GetTripInfo extends TripEvent {
   final String tripId;
   GetTripInfo({this.tripId});
 }
+
+class BookingById extends TripEvent {
+  final String tripId;
+  BookingById({this.tripId});
+}

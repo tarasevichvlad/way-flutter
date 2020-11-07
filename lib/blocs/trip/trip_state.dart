@@ -57,3 +57,7 @@ class TripInfoSuccess extends TripState {
 }
 
 class TripInfoFailure extends TripState {}
+
+class BookingByIdSuccess extends TripState {}
+
+class BookingByIdFailure extends TripState {}

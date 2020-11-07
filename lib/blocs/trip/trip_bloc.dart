@@ -59,6 +59,15 @@ class TripBloc extends Bloc<TripEvent, TripState> {
           yield TripInfoFailure();
         }
       }
+
+      if (event is BookingById) {
+        try {
+          await tripRepository.bookingTripById(event.tripId);
+          yield BookingByIdSuccess();
+        } catch (_) {
+          yield BookingByIdFailure();
+        }
+      }
     } catch (_) {
       yield TripFailure();
     }
