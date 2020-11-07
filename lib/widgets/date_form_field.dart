@@ -40,25 +40,32 @@ class DateFormField extends FormField<DateTime> {
                 ),
                 Positioned(
                     child: Container(
-                        width: 250,
-                        child: state.hasError
-                            ? Padding(
-                                padding: EdgeInsets.only(top: 3),
-                                child: Text(
-                                  state.errorText,
-                                  style: TextStyle(color: Colors.red),
-                                ),
-                              )
-                            : Text(
-                                state.value != null
-                                    ? DateFormat('yyyy-MM-dd')
-                                        .format(state.value)
-                                    : label,
-                                style: TextStyle(
-                                    color: Color.fromRGBO(18, 97, 107, 1),
-                                    fontFamily: 'ComicSansMS',
-                                    fontSize: 16),
-                              )),
+                      width: 250,
+                      child: GestureDetector(
+                          onTap: () {
+                            _selectDate(state);
+                          },
+                          child: state.hasError
+                              ? Padding(
+                                  padding: EdgeInsets.only(top: 3),
+                                  child: Text(
+                                    state.errorText,
+                                    style: TextStyle(color: Colors.red),
+                                  ),
+                                )
+                              : Container(
+                                  child: Text(
+                                    state.value != null
+                                        ? DateFormat('yyyy-MM-dd')
+                                            .format(state.value)
+                                        : label,
+                                    style: TextStyle(
+                                        color: Color.fromRGBO(18, 97, 107, 1),
+                                        fontFamily: 'ComicSansMS',
+                                        fontSize: 16),
+                                  ),
+                                )),
+                    ),
                     left: 40,
                     top: 8)
               ]);
