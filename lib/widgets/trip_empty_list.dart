@@ -6,7 +6,7 @@ class TripEmptyList extends StatelessWidget {
   static TextStyle textStyleBaseTheme = TextStyle(
     fontFamily: 'ComicSansMS',
     fontSize: 30,
-    color: Constants.greyColor,
+    color: Constants.baseColor,
   );
 
   String text;
@@ -44,5 +44,4 @@ class TripEmptyList extends StatelessWidget {
       ),
     );
   }
-
 }

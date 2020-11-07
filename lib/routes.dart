@@ -1,4 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:way/screens/search_list_trip_screen.dart';
+import 'package:way/screens/search_trip_info_screen.dart';
+import 'package:way/screens/success_booking_screen.dart';
 import 'package:way/services/trip/trip_repository.dart';
 
 import 'blocs/trip/trip_bloc.dart';
@@ -20,15 +23,27 @@ class TabNavigatorRoutes {
   static const String myAccount = '/my-account';
 }
 
+class NestedRoutes {
+  static const String searchListTrip = '/search-list-trip';
+  static const String searchTripInfo = '/search-trip-info';
+  static const String searchTripSuccessBooking = '/search-trip-success-booking';
+}
+
 Map<String, Widget> _routes = {
   TabNavigatorRoutes.root: MainScreen(),
   TabNavigatorRoutes.booking: BookingScreen(),
   TabNavigatorRoutes.search: BlocProvider(
       create: (context) => TripBloc(TripRepository(), TripInitial()),
       child: SearchScreen()),
-  TabNavigatorRoutes.createTrip: CreateTripScreen(),
+  TabNavigatorRoutes.createTrip: BlocProvider(
+      create: (context) => TripBloc(TripRepository(), TripInitial()),
+      child: CreateTripScreen()),
   TabNavigatorRoutes.myMessage: MyMessageScreen(),
-  TabNavigatorRoutes.myAccount: MyAccountScreen()
+  TabNavigatorRoutes.myAccount: MyAccountScreen(),
+  NestedRoutes.searchListTrip: SearchListTripScreen(),
+  NestedRoutes.searchTripInfo: SearchTripInfoScreen(),
+  NestedRoutes.searchTripSuccessBooking: SuccessBookingScreen()
 };
 
 List<Widget> routes = _routes.values.toList();
+List<MapEntry<String, Widget>> allRoutes = _routes.entries.toList();

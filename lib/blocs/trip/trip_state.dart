@@ -1,11 +1,8 @@
-import 'package:equatable/equatable.dart';
+import 'package:way/models/search_trip.dart';
 import 'package:way/models/trip.dart';
 
-abstract class TripState extends Equatable {
+abstract class TripState {
   const TripState();
-
-  @override
-  List<Object> get props => [];
 }
 
 class TripInitial extends TripState {}
@@ -16,7 +13,7 @@ class TripSuccess extends TripState {
   List<Trip> trips;
 
   TripSuccess({this.trips}) {
-   trips =  this.trips ?? List<Trip>();
+    trips = this.trips ?? List<Trip>();
   }
 
   TripSuccess copyWith({List<Trip> trips, bool hasReachedMax}) {
@@ -26,9 +23,6 @@ class TripSuccess extends TripState {
   }
 
   @override
-  List<Object> get props => [trips];
-
-  @override
   String toString() => 'TripSuccess { trips: ${trips.length} }';
 }
 
@@ -36,11 +30,28 @@ class TripSearch extends TripState {}
 
 class TripSearchSuccess extends TripState {
   final List<Trip> trips;
+  final SearchTrip searchTrip;
 
-  const TripSearchSuccess({this.trips});
-
-  @override
-  List<Object> get props => [trips];
+  const TripSearchSuccess({this.trips, this.searchTrip});
 }
 
 class TripSearchFailure extends TripState {}
+
+class TripInitialSearchSuccess extends TripState {
+  List<Trip> trips;
+  final SearchTrip searchTrip;
+
+  TripInitialSearchSuccess({this.trips, this.searchTrip}) {
+    trips = this.trips ?? List<Trip>();
+  }
+}
+
+class TripCreateSuccess extends TripState {}
+
+class TripCreateFailure extends TripState {}
+
+class TripInitialInfoSuccess extends TripState {
+  String tripId;
+
+  TripInitialInfoSuccess({this.tripId});
+}

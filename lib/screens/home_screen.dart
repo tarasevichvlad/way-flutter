@@ -33,7 +33,18 @@ class _HomePageState extends State<HomeScreen> {
             child: BlocListener<NavigationBloc, NavigationState>(
           listener: (BuildContext context, NavigationState state) {
             if (state is NavigationSuccess) {
-              // TODO: map string to component
+              int navigationIndex = _findNavigationIndex(state.pathTo);
+              navigateToIndexStack(navigationIndex);
+            }
+
+            if (state is NavigationToSearchTripSuccess) {
+              int navigationIndex = _findNavigationIndex(state.pathTo);
+              navigateToIndexStack(navigationIndex);
+            }
+
+            if (state is NavigationToBookingTripSuccess) {
+              int navigationIndex = _findNavigationIndex(state.pathTo);
+              navigateToIndexStack(navigationIndex);
             }
           },
           child: IndexedStack(
@@ -60,5 +71,17 @@ class _HomePageState extends State<HomeScreen> {
       this._currentIndexTab = page;
       this._currentIndexPage = page + 1;
     });
+  }
+
+  int _findNavigationIndex(String pathTo) {
+    return allRoutes.indexWhere((element) => element.key == pathTo);
+  }
+
+  void navigateToIndexStack(int navigationIndex) {
+    if (navigationIndex != null && navigationIndex != -1) {
+      setState(() {
+        _currentIndexPage = navigationIndex;
+      });
+    }
   }
 }

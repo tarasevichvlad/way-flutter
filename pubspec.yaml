@@ -60,6 +60,8 @@ flutter:
     - assets/images/home_bg.jpg
     - assets/images/find.png
     - assets/images/review.jpg
+    - assets/images/info.png
+    - assets/images/success.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
