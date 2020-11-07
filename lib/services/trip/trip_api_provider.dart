@@ -62,6 +62,7 @@ class TripProvider {
           'Content-Type': 'application/json'
         },
         body: json.encode(data));
+    print(response.body);
     if (response.statusCode == 200) {
       try {
         final List<dynamic> tripJson = json.decode(response.body);
@@ -82,6 +83,7 @@ class TripProvider {
           'Content-Type': 'application/json'
         },
         body: json.encode(data));
+
     if (response.statusCode == 200) {
       try {
         return null;
@@ -90,6 +92,25 @@ class TripProvider {
       }
     } else {
       throw Exception('Error create trip');
+    }
+  }
+
+  Future<Trip> getTripById(String tripId) async {
+    final token = await auth.getToken();
+    final response = await http.get(Constants.getBaseUrl() + "/trips/${tripId}",
+        headers: {
+          'Authorization': "Bearer " + token,
+          'Content-Type': 'application/json'
+        });
+    if (response.statusCode == 200) {
+      try {
+        final dynamic tripJson = json.decode(response.body);
+        return Trip.fromJson(tripJson);
+      } catch (e) {
+        throw Exception('Error get trip by id');
+      }
+    } else {
+      throw Exception('Error get trip by id');
     }
   }
 }

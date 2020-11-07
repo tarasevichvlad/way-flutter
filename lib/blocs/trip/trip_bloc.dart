@@ -51,8 +51,13 @@ class TripBloc extends Bloc<TripEvent, TripState> {
             trips: event.trips, searchTrip: event.searchTrip);
       }
 
-      if (event is TripInitialInfo) {
-        yield TripInitialInfoSuccess(tripId: event.tripId);
+      if (event is GetTripInfo) {
+        try {
+          final trip = await tripRepository.getTripById(event.tripId);
+          yield TripInfoSuccess(trip: trip);
+        } catch (_) {
+          yield TripInfoFailure();
+        }
       }
     } catch (_) {
       yield TripFailure();
