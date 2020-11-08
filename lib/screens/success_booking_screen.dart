@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:way/blocs/navigation/navigation_bloc.dart';
 import 'package:way/blocs/navigation/navigation_event.dart';
 import 'package:way/routes.dart';
+import 'package:way/utils/constants.dart';
 
 class SuccessBookingScreen extends StatefulWidget {
   @override
@@ -24,10 +25,7 @@ class _SuccessBookingScreen extends State<SuccessBookingScreen> {
                 margin: EdgeInsets.fromLTRB(0, 100, 0, 70),
                 child: Text(
                   'В добрый путь!',
-                  style: TextStyle(
-                      color: Color.fromRGBO(18, 97, 107, 1),
-                      fontFamily: 'ComicSansMS',
-                      fontSize: 28),
+                  style: Constants.getDefaultStyle(28),
                 ),
               ),
               Image.asset('assets/images/success.png')
@@ -46,11 +44,8 @@ class _SuccessBookingScreen extends State<SuccessBookingScreen> {
                 width: 330,
                 padding: EdgeInsets.all(10),
                 child: Center(
-                  child: Text('Продолжить',
-                      style: TextStyle(
-                          color: Color.fromRGBO(18, 97, 107, 1),
-                          fontFamily: 'ComicSansMS',
-                          fontSize: 18)),
+                  child:
+                      Text('Продолжить', style: Constants.getDefaultStyle(18)),
                 ),
               ),
             ),

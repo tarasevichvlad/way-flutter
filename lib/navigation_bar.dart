@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:way/utils/constants.dart';
 import 'navigation_icons.dart';
 import 'routes.dart';
 
@@ -41,7 +42,7 @@ class NavigationBar extends StatelessWidget {
           .toList()
           .map((item) => _buildItem(barItem: item))
           .toList(),
-      backgroundColor: Color.fromRGBO(18, 97, 106, 1),
+      backgroundColor: Constants.baseColor,
     );
   }
 

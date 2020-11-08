@@ -16,16 +16,6 @@ class Account extends StatefulWidget {
 }
 
 class _AccountState extends State<Account> {
-  static const TextStyle textStyle = TextStyle(
-      fontFamily: 'Comic Sans MS',
-      fontSize: 18,
-      color: const Color(0xff12616a));
-
-  static const TextStyle textStyle1 = TextStyle(
-      fontFamily: 'Comic Sans MS',
-      fontSize: 16,
-      color: const Color(0xff12616a));
-
   UserBloc _userBloc;
 
   @override
@@ -47,7 +37,6 @@ class _AccountState extends State<Account> {
         }
 
         if (state is UserSuccess) {
-
           return Column(
             children: [
               Container(
@@ -72,7 +61,7 @@ class _AccountState extends State<Account> {
                         padding: const EdgeInsets.only(bottom: 10),
                         child: Text(
                           state.user.getFullName(),
-                          style: textStyle,
+                          style: Constants.getDefaultStyle(18),
                         ),
                       ),
                       Row(
@@ -107,7 +96,7 @@ class _AccountState extends State<Account> {
                             padding: const EdgeInsets.only(left: 10),
                             child: Text(
                               state.user.rating.toString(),
-                              style: textStyle,
+                              style: Constants.getDefaultStyle(18),
                             ),
                           )
                         ],
@@ -130,9 +119,11 @@ class _AccountState extends State<Account> {
                                 print("The place for navigate to trips");
                               },
                               child: Column(children: [
-                                Text(state.user.tripCount.toString(), style: textStyle1),
+                                Text(state.user.tripCount.toString(),
+                                    style: Constants.getDefaultStyle(16)),
                                 SizedBox(height: 5),
-                                Text("Поездок", style: textStyle1)
+                                Text("Поездок",
+                                    style: Constants.getDefaultStyle(16))
                               ]),
                             ),
                             VerticalDivider(
@@ -146,9 +137,11 @@ class _AccountState extends State<Account> {
                               },
                               child: Column(
                                 children: [
-                                  Text(state.user.reviews.length.toString(), style: textStyle1),
+                                  Text(state.user.reviews.length.toString(),
+                                      style: Constants.getDefaultStyle(16)),
                                   SizedBox(height: 5),
-                                  Text("Отзывов", style: textStyle1)
+                                  Text("Отзывов",
+                                      style: Constants.getDefaultStyle(16))
                                 ],
                               ),
                             ),

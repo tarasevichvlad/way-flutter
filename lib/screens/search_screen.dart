@@ -5,6 +5,7 @@ import 'package:way/blocs/navigation/navigation_bloc.dart';
 import 'package:way/blocs/navigation/navigation_event.dart';
 import 'package:way/models/search_trip.dart';
 import 'package:way/routes.dart';
+import 'package:way/utils/constants.dart';
 import 'package:way/widgets/search_form.dart';
 
 class SearchScreen extends StatefulWidget {
@@ -82,11 +83,7 @@ class _SearchScreenState extends State<SearchScreen> {
                 width: 330,
                 padding: EdgeInsets.all(10),
                 child: Center(
-                  child: Text('Найти',
-                      style: TextStyle(
-                          color: Color.fromRGBO(18, 97, 107, 1),
-                          fontFamily: 'ComicSansMS',
-                          fontSize: 18)),
+                  child: Text('Найти', style: Constants.getDefaultStyle(18)),
                 ),
               ),
             )

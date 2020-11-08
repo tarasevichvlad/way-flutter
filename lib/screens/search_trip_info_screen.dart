@@ -8,6 +8,7 @@ import 'package:way/blocs/navigation/navigation_state.dart';
 import 'package:way/routes.dart';
 import 'package:way/search_icons.dart';
 import 'package:way/services/trip/trip_repository.dart';
+import 'package:way/utils/constants.dart';
 
 class SearchTripInfoScreen extends StatefulWidget {
   @override
@@ -15,11 +16,6 @@ class SearchTripInfoScreen extends StatefulWidget {
 }
 
 class _SearchTripInfoScreen extends State<SearchTripInfoScreen> {
-  TextStyle _defaultTextStyle = TextStyle(
-      color: Color.fromRGBO(18, 97, 107, 1),
-      fontFamily: 'ComicSansMS',
-      fontSize: 14);
-
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -61,17 +57,11 @@ class _SearchTripInfoScreen extends State<SearchTripInfoScreen> {
                             children: [
                               Text(
                                 state.trip.driver.getFullName(),
-                                style: TextStyle(
-                                    color: Color.fromRGBO(18, 97, 107, 1),
-                                    fontFamily: 'ComicSansMS',
-                                    fontSize: 22),
+                                style: Constants.getDefaultStyle(22),
                               ),
                               Text(
                                 "Маршрут: ${state.trip.from} - ${state.trip.to}",
-                                style: TextStyle(
-                                    color: Color.fromRGBO(18, 97, 107, 1),
-                                    fontFamily: 'ComicSansMS',
-                                    fontSize: 18),
+                                style: Constants.getDefaultStyle(18),
                               ),
                               Container(
                                   margin: EdgeInsets.fromLTRB(0, 15, 0, 15),
@@ -79,7 +69,7 @@ class _SearchTripInfoScreen extends State<SearchTripInfoScreen> {
                                     children: [
                                       Icon(
                                         SearchIcons.calendar_outlilne,
-                                        color: Color.fromRGBO(18, 97, 107, 1),
+                                        color: Constants.baseColor,
                                       ),
                                       Container(
                                         padding: EdgeInsets.only(left: 20),
@@ -87,7 +77,8 @@ class _SearchTripInfoScreen extends State<SearchTripInfoScreen> {
                                           opacity: 0.6,
                                           child: Text(
                                             "Дата выезда ${startDate}",
-                                            style: _defaultTextStyle,
+                                            style:
+                                                Constants.getDefaultStyle(14),
                                           ),
                                         ),
                                       )
@@ -99,7 +90,7 @@ class _SearchTripInfoScreen extends State<SearchTripInfoScreen> {
                                     children: [
                                       Icon(
                                         SearchIcons.clock,
-                                        color: Color.fromRGBO(18, 97, 107, 1),
+                                        color: Constants.baseColor,
                                       ),
                                       Container(
                                         padding: EdgeInsets.only(left: 20),
@@ -107,7 +98,8 @@ class _SearchTripInfoScreen extends State<SearchTripInfoScreen> {
                                           opacity: 0.6,
                                           child: Text(
                                             "Время ${startTime}",
-                                            style: _defaultTextStyle,
+                                            style:
+                                                Constants.getDefaultStyle(14),
                                           ),
                                         ),
                                       )
@@ -119,7 +111,7 @@ class _SearchTripInfoScreen extends State<SearchTripInfoScreen> {
                                     children: [
                                       Icon(
                                         SearchIcons.airline_seat_recline_normal,
-                                        color: Color.fromRGBO(18, 97, 107, 1),
+                                        color: Constants.baseColor,
                                       ),
                                       Container(
                                         padding: EdgeInsets.only(left: 20),
@@ -127,7 +119,8 @@ class _SearchTripInfoScreen extends State<SearchTripInfoScreen> {
                                           opacity: 0.6,
                                           child: Text(
                                             "Количество пассажиров (${state.trip.passengers.length})",
-                                            style: _defaultTextStyle,
+                                            style:
+                                                Constants.getDefaultStyle(14),
                                           ),
                                         ),
                                       )
@@ -139,7 +132,7 @@ class _SearchTripInfoScreen extends State<SearchTripInfoScreen> {
                                   children: [
                                     Icon(
                                       Icons.local_offer,
-                                      color: Color.fromRGBO(18, 97, 107, 1),
+                                      color: Constants.baseColor,
                                     ),
                                     Container(
                                       padding: EdgeInsets.only(left: 20),
@@ -147,7 +140,7 @@ class _SearchTripInfoScreen extends State<SearchTripInfoScreen> {
                                         opacity: 0.6,
                                         child: Text(
                                           "Стоимость (${state.trip.price} рублей)",
-                                          style: _defaultTextStyle,
+                                          style: Constants.getDefaultStyle(14),
                                         ),
                                       ),
                                     )
@@ -163,7 +156,7 @@ class _SearchTripInfoScreen extends State<SearchTripInfoScreen> {
                                       padding: EdgeInsets.only(top: 12),
                                       child: Icon(
                                         SearchIcons.users,
-                                        color: Color.fromRGBO(18, 97, 107, 1),
+                                        color: Constants.baseColor,
                                       ),
                                     ),
                                     Container(
@@ -175,15 +168,15 @@ class _SearchTripInfoScreen extends State<SearchTripInfoScreen> {
                                           child: SwitchListTile(
                                             title: Text(
                                               'Сзади только двое?',
-                                              style: _defaultTextStyle,
+                                              style:
+                                                  Constants.getDefaultStyle(14),
                                             ),
                                             contentPadding: EdgeInsets.all(0),
                                             value: state.trip.onlyTwoBehind,
                                             onChanged: (state) {},
                                             inactiveThumbColor:
-                                                Color.fromRGBO(18, 97, 107, 1),
-                                            activeColor:
-                                                Color.fromRGBO(18, 97, 107, 1),
+                                                Constants.baseColor,
+                                            activeColor: Constants.baseColor,
                                           )),
                                     )
                                   ],
@@ -203,7 +196,7 @@ class _SearchTripInfoScreen extends State<SearchTripInfoScreen> {
                           width: 360,
                           child: Text(
                             state.trip.comment,
-                            style: _defaultTextStyle,
+                            style: Constants.getDefaultStyle(14),
                           ),
                         ),
                         FlatButton(
@@ -217,10 +210,7 @@ class _SearchTripInfoScreen extends State<SearchTripInfoScreen> {
                             padding: EdgeInsets.all(10),
                             child: Center(
                               child: Text('Забронировать',
-                                  style: TextStyle(
-                                      color: Color.fromRGBO(18, 97, 107, 1),
-                                      fontFamily: 'ComicSansMS',
-                                      fontSize: 18)),
+                                  style: Constants.getDefaultStyle(18)),
                             ),
                           ),
                         )

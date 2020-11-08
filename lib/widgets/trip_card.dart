@@ -8,12 +8,8 @@ class TripCard extends StatelessWidget {
   static const TextStyle textStyleWhite =
       TextStyle(fontFamily: 'Comic Sans MS', fontSize: 18, color: Colors.white);
   static const TextPaddingTop = const EdgeInsets.only(left: 3, right: 3);
-  static const TextPaddingBottom = const EdgeInsets.only(left: 3, right: 3, top: 22);
-
-  static TextStyle textStyleBaseTheme = TextStyle(
-      fontFamily: 'Comic Sans MS',
-      fontSize: 18,
-      color: Constants.baseColor);
+  static const TextPaddingBottom =
+      const EdgeInsets.only(left: 3, right: 3, top: 22);
 
   TripCard({@required this.trip});
 
@@ -63,15 +59,17 @@ class TripCard extends StatelessWidget {
                           child: Stack(
                             children: [
                               Padding(
-                                padding: const EdgeInsets.only(left: 5, right: 5, top: 4),
-                                child: Icon(
-                                  Icons.brightness_1,
-                                  color: Constants.whiteColor,
-                                  size: 14.0,
-                                )//SvgPicture.string(circle),
-                              ),
+                                  padding: const EdgeInsets.only(
+                                      left: 5, right: 5, top: 4),
+                                  child: Icon(
+                                    Icons.brightness_1,
+                                    color: Constants.whiteColor,
+                                    size: 14.0,
+                                  ) //SvgPicture.string(circle),
+                                  ),
                               Padding(
-                                padding: const EdgeInsets.only(left: 5, right: 5, top: 26),
+                                padding: const EdgeInsets.only(
+                                    left: 5, right: 5, top: 26),
                                 child: Icon(
                                   Icons.brightness_1,
                                   color: Constants.whiteColor,
@@ -79,33 +77,30 @@ class TripCard extends StatelessWidget {
                                 ),
                               ),
                             ],
-                          )
-                      ),
+                          )),
                       SizedBox(
-                        height: 60,
-                        child: Stack(
-                          children: [
-                            Padding(
-                              padding: TextPaddingTop,
-                              child: Text(
-                                '${trip.from}',
-                                style: textStyleWhite,
+                          height: 60,
+                          child: Stack(
+                            children: [
+                              Padding(
+                                padding: TextPaddingTop,
+                                child: Text(
+                                  '${trip.from}',
+                                  style: textStyleWhite,
+                                ),
                               ),
-                            ),
-                            Padding(
-                              padding: TextPaddingBottom,
-                              child: Text(
-                                '${trip.to}',
-                                style: textStyleWhite,
-                              ),
-                            )
-                          ],
-                        )
-                      )
+                              Padding(
+                                padding: TextPaddingBottom,
+                                child: Text(
+                                  '${trip.to}',
+                                  style: textStyleWhite,
+                                ),
+                              )
+                            ],
+                          ))
                     ],
                   ),
-                )
-            ),
+                )),
           ),
           SizedBox(
             height: 60,
@@ -132,7 +127,7 @@ class TripCard extends StatelessWidget {
                         children: [
                           Text(
                             '${trip.driver.getFullName()}',
-                            style: textStyleBaseTheme,
+                            style: Constants.getDefaultStyle(18),
                           ),
                           Row(
                             children: [
@@ -145,7 +140,7 @@ class TripCard extends StatelessWidget {
                                 padding: const EdgeInsets.only(left: 3),
                                 child: Text(
                                   "${trip.driver.rating}",
-                                  style: textStyleBaseTheme,
+                                  style: Constants.getDefaultStyle(18),
                                 ),
                               ),
                               Padding(
@@ -156,13 +151,13 @@ class TripCard extends StatelessWidget {
                                   size: 20.0,
                                 ),
                               ),
-                             Padding(
-                               padding: const EdgeInsets.only(left: 3),
-                               child:  Text(
-                                 "${trip.price}р",
-                                 style: textStyleBaseTheme,
-                               ),
-                             ),
+                              Padding(
+                                padding: const EdgeInsets.only(left: 3),
+                                child: Text(
+                                  "${trip.price}р",
+                                  style: Constants.getDefaultStyle(18),
+                                ),
+                              ),
                               Padding(
                                 padding: const EdgeInsets.only(left: 25),
                                 child: Icon(
@@ -175,7 +170,7 @@ class TripCard extends StatelessWidget {
                                 padding: const EdgeInsets.only(left: 3),
                                 child: Text(
                                   "${trip.seats - trip.passengers.length}",
-                                  style: textStyleBaseTheme,
+                                  style: Constants.getDefaultStyle(18),
                                 ),
                               )
                             ],

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:way/search_icons.dart';
+import 'package:way/utils/constants.dart';
 import 'package:way/widgets/date_form_field.dart';
 import 'package:way/widgets/time_form_field.dart';
 
@@ -53,10 +54,7 @@ class _SearchFormState extends State<SearchForm> {
   TripModel model = TripModel();
   Function onSaved;
   bool isCreateMode = false;
-  TextStyle _defaultTextStyle = TextStyle(
-      color: Color.fromRGBO(18, 97, 107, 1),
-      fontFamily: 'ComicSansMS',
-      fontSize: 16);
+  EdgeInsets _defaultMargin = EdgeInsets.only(right: 18);
 
   _SearchFormState(
       {this.formKey,
@@ -129,10 +127,12 @@ class _SearchFormState extends State<SearchForm> {
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Icon(
-                    Icons.local_offer,
-                    color: Color.fromRGBO(18, 97, 107, 1),
-                  ),
+                  Container(
+                      child: Icon(
+                        Icons.local_offer,
+                        color: Constants.baseColor,
+                      ),
+                      margin: _defaultMargin),
                   Container(
                     width: 250,
                     child: TextFormField(
@@ -144,9 +144,8 @@ class _SearchFormState extends State<SearchForm> {
                         },
                         decoration: InputDecoration(
                             hintText: 'За сколько?',
-                            hintStyle: _defaultTextStyle,
+                            hintStyle: Constants.getDefaultStyle(16),
                             errorStyle: TextStyle(color: Colors.red))),
-                    padding: EdgeInsets.only(left: 16),
                   )
                 ],
               ),
@@ -160,10 +159,12 @@ class _SearchFormState extends State<SearchForm> {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Icon(
-              SearchIcons.location,
-              color: Color.fromRGBO(18, 97, 107, 1),
-            ),
+            Container(
+                child: Icon(
+                  SearchIcons.location,
+                  color: Constants.baseColor,
+                ),
+                margin: _defaultMargin),
             Container(
               width: 250,
               child: TextFormField(
@@ -175,9 +176,8 @@ class _SearchFormState extends State<SearchForm> {
                   },
                   decoration: InputDecoration(
                       hintText: 'Откуда?',
-                      hintStyle: _defaultTextStyle,
+                      hintStyle: Constants.getDefaultStyle(16),
                       errorStyle: TextStyle(color: Colors.red))),
-              padding: EdgeInsets.only(left: 16),
             )
           ],
         ),
@@ -188,9 +188,12 @@ class _SearchFormState extends State<SearchForm> {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Icon(
-              SearchIcons.location,
-              color: Color.fromRGBO(18, 97, 107, 1),
+            Container(
+              child: Icon(
+                SearchIcons.location,
+                color: Constants.baseColor,
+              ),
+              margin: _defaultMargin,
             ),
             Container(
               width: 250,
@@ -203,9 +206,8 @@ class _SearchFormState extends State<SearchForm> {
                   },
                   decoration: InputDecoration(
                       hintText: 'Куда?',
-                      hintStyle: _defaultTextStyle,
+                      hintStyle: Constants.getDefaultStyle(16),
                       errorStyle: TextStyle(color: Colors.red))),
-              padding: EdgeInsets.only(left: 16),
             )
           ],
         ),
@@ -261,10 +263,12 @@ class _SearchFormState extends State<SearchForm> {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Icon(
-              SearchIcons.airline_seat_recline_normal,
-              color: Color.fromRGBO(18, 97, 107, 1),
-            ),
+            Container(
+                child: Icon(
+                  SearchIcons.airline_seat_recline_normal,
+                  color: Constants.baseColor,
+                ),
+                margin: _defaultMargin),
             Container(
               width: 250,
               child: TextFormField(
@@ -277,9 +281,8 @@ class _SearchFormState extends State<SearchForm> {
                   },
                   decoration: InputDecoration(
                       hintText: 'Сколько нужно мест?',
-                      hintStyle: _defaultTextStyle,
+                      hintStyle: Constants.getDefaultStyle(16),
                       errorStyle: TextStyle(color: Colors.red))),
-              padding: EdgeInsets.only(left: 16),
             )
           ],
         ),
@@ -291,14 +294,14 @@ class _SearchFormState extends State<SearchForm> {
           children: [
             Icon(
               SearchIcons.users,
-              color: Color.fromRGBO(18, 97, 107, 1),
+              color: Constants.baseColor,
             ),
             Container(
               width: 250,
               child: SwitchListTile(
                 title: Text(
                   'Сзади только двое?',
-                  style: _defaultTextStyle,
+                  style: Constants.getDefaultStyle(16),
                 ),
                 value: model.onlyTwo,
                 onChanged: (value) {
@@ -307,7 +310,7 @@ class _SearchFormState extends State<SearchForm> {
                     onSaved(model);
                   });
                 },
-                activeColor: Color.fromRGBO(18, 97, 107, 1),
+                activeColor: Constants.baseColor,
               ),
             )
           ],

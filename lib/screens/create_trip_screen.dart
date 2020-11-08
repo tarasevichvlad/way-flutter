@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:way/blocs/blocs.dart';
 import 'package:way/blocs/trip/trip_bloc.dart';
 import 'package:way/models/create_trip.dart';
+import 'package:way/utils/constants.dart';
 import 'package:way/widgets/search_form.dart';
 
 class CreateTripScreen extends StatefulWidget {
@@ -14,10 +15,6 @@ class _CreateTripState extends State<CreateTripScreen> {
   final _formKey = GlobalKey<FormState>();
   TripModel model;
   bool autoValidate = false;
-  TextStyle _defaultTextStyle = TextStyle(
-      color: Color.fromRGBO(18, 97, 107, 1),
-      fontFamily: 'ComicSansMS',
-      fontSize: 16);
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +34,8 @@ class _CreateTripState extends State<CreateTripScreen> {
             },
             maxLines: 3,
             decoration: InputDecoration.collapsed(
-                hintText: "Описание поездки", hintStyle: _defaultTextStyle),
+                hintText: "Описание поездки",
+                hintStyle: Constants.getDefaultStyle(16)),
           ),
         ),
       ],
@@ -52,10 +50,7 @@ class _CreateTripState extends State<CreateTripScreen> {
             child: Center(
               child: Text(
                 'Новая поездка',
-                style: TextStyle(
-                    color: Color.fromRGBO(18, 97, 107, 1),
-                    fontFamily: 'ComicSansMS',
-                    fontSize: 20),
+                style: Constants.getDefaultStyle(20),
               ),
             ),
             margin: EdgeInsets.fromLTRB(0, 8, 0, 0),
@@ -105,11 +100,7 @@ class _CreateTripState extends State<CreateTripScreen> {
               width: 330,
               padding: EdgeInsets.all(10),
               child: Center(
-                child: Text('Создать',
-                    style: TextStyle(
-                        color: Color.fromRGBO(18, 97, 107, 1),
-                        fontFamily: 'ComicSansMS',
-                        fontSize: 18)),
+                child: Text('Создать', style: Constants.getDefaultStyle(18)),
               ),
             ),
           )
