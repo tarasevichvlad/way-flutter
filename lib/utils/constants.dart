@@ -24,4 +24,9 @@ class Constants {
   static Color baseColor = const Color(0xff12616a);
   static Color whiteColor = Colors.white;
   static Color greyColor = Color.fromRGBO(245, 245, 243, 100);
+  static TextStyle Function(double) getDefaultStyle = (double fontSize) =>
+      TextStyle(
+          color: Constants.baseColor,
+          fontFamily: 'Comic Sans MS',
+          fontSize: fontSize);
 }

@@ -27,3 +27,8 @@ class NavigationToBookingTripSuccess extends NavigationState {
   final String pathTo;
   NavigationToBookingTripSuccess({this.pathTo, this.tripId});
 }
+
+class NavigationMainSuccess extends NavigationState {
+  final String pathTo;
+  NavigationMainSuccess({this.pathTo});
+}

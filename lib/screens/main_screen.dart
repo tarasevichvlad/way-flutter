@@ -15,26 +15,17 @@ class MainScreen extends StatelessWidget {
                 Text(
                   'Найди новое место,',
                   textAlign: TextAlign.center,
-                  style: TextStyle(
-                      color: Constants.baseColor,
-                      fontFamily: 'ComicSansMS',
-                      fontSize: 30),
+                  style: Constants.getDefaultStyle(30),
                 ),
                 Text(
                   'путешествия',
                   textAlign: TextAlign.center,
-                  style: TextStyle(
-                      color: Constants.baseColor,
-                      fontFamily: 'ComicSansMS',
-                      fontSize: 30),
+                  style: Constants.getDefaultStyle(30),
                 ),
                 Text(
                   'и людей',
                   textAlign: TextAlign.center,
-                  style: TextStyle(
-                      color: Constants.baseColor,
-                      fontFamily: 'ComicSansMS',
-                      fontSize: 30),
+                  style: Constants.getDefaultStyle(30),
                 ),
                 Padding(
                   padding: EdgeInsets.only(top: 42),

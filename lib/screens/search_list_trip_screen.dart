@@ -7,6 +7,7 @@ import 'package:way/blocs/navigation/navigation_event.dart';
 import 'package:way/blocs/navigation/navigation_state.dart';
 import 'package:way/routes.dart';
 import 'package:way/services/trip/trip_repository.dart';
+import 'package:way/utils/constants.dart';
 import 'package:way/widgets/trip_card.dart';
 import 'package:way/widgets/trip_empty_list.dart';
 import 'package:way/widgets/trip_failure_list.dart';
@@ -87,10 +88,7 @@ class _SearchListTripScreen extends State<SearchListTripScreen> {
                           child: Padding(
                             child: Text(
                               placeholder,
-                              style: TextStyle(
-                                  color: Color.fromRGBO(18, 97, 107, 1),
-                                  fontFamily: 'ComicSansMS',
-                                  fontSize: 14),
+                              style: Constants.getDefaultStyle(14),
                             ),
                             padding: EdgeInsets.all(16),
                           ),

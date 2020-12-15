@@ -17,7 +17,6 @@ class ReviewList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       backgroundColor: Constants.whiteColor,
       body: Column(
@@ -25,7 +24,9 @@ class ReviewList extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(left: 10, top: 10, bottom: 10),
             child: GestureDetector(
-              onTap: () { userBloc.add(UserFetched()); },
+              onTap: () {
+                userBloc.add(UserFetched());
+              },
               child: Row(
                 children: [
                   Icon(
@@ -33,7 +34,10 @@ class ReviewList extends StatelessWidget {
                     color: Constants.baseColor,
                     size: 30.0,
                   ),
-                  Text("Назад", style: Constants.textStyle14,)
+                  Text(
+                    "Назад",
+                    style: Constants.getDefaultStyle(14),
+                  )
                 ],
               ),
             ),
@@ -67,7 +71,7 @@ class ReviewList extends StatelessWidget {
                     child: Wrap(children: [
                       Text(
                         "На данный момент у Вас нет отзывов",
-                        style: Constants.textStyle30,
+                        style: Constants.getDefaultStyle(30),
                         textAlign: TextAlign.center,
                       )
                     ]),

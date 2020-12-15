@@ -12,4 +12,7 @@ class TripRepository {
   Future<List<Trip>> searchTrips(SearchTrip data) =>
       _tripProvider.searchTrip(data);
   Future<Null> createTrip(CreateTrip data) => _tripProvider.createTrip(data);
+  Future<Trip> getTripById(String tripId) => _tripProvider.getTripById(tripId);
+  Future<Null> bookingTripById(String tripId) =>
+      _tripProvider.bookingTripById(tripId);
 }

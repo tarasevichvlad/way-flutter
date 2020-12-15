@@ -50,8 +50,14 @@ class TripCreateSuccess extends TripState {}
 
 class TripCreateFailure extends TripState {}
 
-class TripInitialInfoSuccess extends TripState {
-  String tripId;
+class TripInfoSuccess extends TripState {
+  Trip trip;
 
-  TripInitialInfoSuccess({this.tripId});
+  TripInfoSuccess({this.trip});
 }
+
+class TripInfoFailure extends TripState {}
+
+class BookingByIdSuccess extends TripState {}
+
+class BookingByIdFailure extends TripState {}

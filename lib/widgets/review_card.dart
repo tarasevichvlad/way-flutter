@@ -10,8 +10,6 @@ class ReviewCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-
     return Container(
       decoration: BoxDecoration(
           color: Constants.greyColor,
@@ -20,7 +18,8 @@ class ReviewCard extends StatelessWidget {
       child: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.only(left: 25, right: 25, top: 15, bottom: 15),
+            padding:
+                const EdgeInsets.only(left: 25, right: 25, top: 15, bottom: 15),
             child: SizedBox(
               height: 30,
               child: Row(
@@ -31,27 +30,26 @@ class ReviewCard extends StatelessWidget {
                     size: 40.0,
                   ),
                   Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 15),
-                      child: Text(this.review.from.getFullName(), style: Constants.textStyle14),
-                    )
-                  ),
+                      child: Padding(
+                    padding: const EdgeInsets.only(left: 15),
+                    child: Text(this.review.from.getFullName(),
+                        style: Constants.getDefaultStyle(14)),
+                  )),
                   Icon(
                     Icons.star,
                     color: Constants.baseColor,
                     size: 20.0,
                   ),
-                  Text(this.review.rating.toString(), style: Constants.textStyle14)
+                  Text(this.review.rating.toString(),
+                      style: Constants.getDefaultStyle(14))
                 ],
               ),
             ),
           ),
           Padding(
             padding: const EdgeInsets.only(left: 25, right: 25, bottom: 15),
-            child:  Wrap(
-              children: [
-                Text(this.review.body, style: Constants.textStyle14)
-              ],
+            child: Wrap(
+              children: [Text(this.review.body, style: Constants.textStyle14)],
             ),
           )
         ],

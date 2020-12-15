@@ -31,3 +31,12 @@ class NavigationToBookingTrip extends NavigationEvent {
   @override
   List<Object> get props => [pathTo, tripId];
 }
+
+class NavgationMainStart extends NavigationEvent {
+  final String pathTo;
+
+  NavgationMainStart({this.pathTo}) : assert(pathTo != null);
+
+  @override
+  List<Object> get props => [pathTo];
+}
